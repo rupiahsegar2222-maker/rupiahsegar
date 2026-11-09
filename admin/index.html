@@ -3399,7 +3399,175 @@ createMaintenanceField();
 
 
 
+// ======================================
+// ADMIN MAINTENANCE REALTIME
+// ======================================
 
+(function adminMaintenanceRealtime() {
+
+  const maintenanceRef = ref(
+    realtimeDB,
+    "setting/maintenance"
+  );
+
+  // Buat tampilan maintenance
+  function buatTampilanMaintenance() {
+
+    if (document.getElementById("adminMaintenanceOverlay")) {
+      return;
+    }
+
+    // CSS khusus maintenance admin
+    const style = document.createElement("style");
+
+    style.id = "adminMaintenanceStyle";
+
+    style.textContent = `
+      #adminMaintenanceOverlay {
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+        background: #f3f5fb;
+        font-family: Poppins, sans-serif;
+        text-align: center;
+      }
+
+      #adminMaintenanceOverlay .admin-maintenance-box {
+        width: 100%;
+        max-width: 420px;
+        padding: 35px 25px;
+        background: #fff;
+        border-radius: 22px;
+        box-shadow: 0 10px 40px rgba(0,0,0,.08);
+      }
+
+      #adminMaintenanceOverlay .admin-maintenance-icon {
+        width: 75px;
+        height: 75px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #eee9ff;
+        color: #5c27fe;
+        font-size: 32px;
+      }
+
+      #adminMaintenanceOverlay h2 {
+        margin: 0 0 12px;
+        color: #202033;
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      #adminMaintenanceOverlay p {
+        margin: 0;
+        color: #777;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      #adminMaintenanceOverlay .admin-maintenance-status {
+        display: inline-block;
+        margin-top: 22px;
+        padding: 8px 16px;
+        border-radius: 30px;
+        background: #fff0e8;
+        color: #e36a22;
+        font-size: 12px;
+        font-weight: 600;
+      }
+    `;
+
+    document.head.appendChild(style);
+
+    // HTML maintenance
+    const overlay = document.createElement("div");
+
+    overlay.id = "adminMaintenanceOverlay";
+
+    overlay.innerHTML = `
+      <div class="admin-maintenance-box">
+
+<div class="admin-maintenance-icon">
+  <img
+    src="mintrue.png"
+    alt="Maintenance"
+    style="width:75px;height:75px;object-fit:contain;"
+  >
+</div>
+
+        <h2>Panel Sedang Maintenance</h2>
+
+        <p>
+          Panel administrator sementara tidak dapat digunakan
+          karena sistem sedang dalam pemeliharaan.
+          Silakan coba kembali beberapa saat lagi.
+        </p>
+
+        <div class="admin-maintenance-status">
+          MAINTENANCE AKTIF
+        </div>
+
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+  }
+
+  // Dengarkan perubahan Firebase secara realtime
+  onValue(maintenanceRef, function(snapshot) {
+
+    const maintenanceAktif = snapshot.val() === true;
+
+    if (maintenanceAktif) {
+
+      buatTampilanMaintenance();
+
+      const overlay = document.getElementById(
+        "adminMaintenanceOverlay"
+      );
+
+      if (overlay) {
+        overlay.style.display = "flex";
+      }
+
+      // Kunci scroll halaman admin
+      document.body.style.overflow = "hidden";
+
+      console.log("ADMIN MAINTENANCE: AKTIF");
+
+    } else {
+
+      const overlay = document.getElementById(
+        "adminMaintenanceOverlay"
+      );
+
+      if (overlay) {
+        overlay.style.display = "none";
+      }
+
+      document.body.style.overflow = "";
+
+      console.log("ADMIN MAINTENANCE: NONAKTIF");
+
+    }
+
+  }, function(error) {
+
+    console.error(
+      "Gagal memantau maintenance admin:",
+      error
+    );
+
+  });
+
+})();
 
 
 
