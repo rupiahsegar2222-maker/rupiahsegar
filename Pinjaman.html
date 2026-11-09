@@ -4,41 +4,47 @@
 <head>
 <meta charset="UTF-8">
 
+
 <!-- VIEWPORT -->
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <!-- SEO -->
-<meta name="description" content="Layanan pengecekan tagihan dan pembayaran pinjaman secara online.">
+<title>DANA PLATFORM - Layanan Digital</title>
+<meta name="description" content="DANA PLATFORM - Layanan pengecekan informasi dan layanan pengguna secara online.">
 <meta name="robots" content="index, follow">
 
-<!-- OPEN GRAPH (WhatsApp / Facebook) -->
-<meta property="og:title" content="Pinjamanku - Cek Tagihan Online">
-<meta property="og:description" content="Layanan pengecekan tagihan dan pembayaran pinjaman secara online.">
-<meta property="og:image" content="https://rupiahsegar.sbs/rupiahsegar-view.jpg">
-<meta property="og:url" content="https://rupiahsegar.sbs">
+<!-- OPEN GRAPH -->
+<meta property="og:title" content="DANA PLATFORM">
+<meta property="og:description" content="Layanan digital DANA PLATFORM.">
+<meta property="og:image" content="https://danaplatform.github.io/danaplatform/logo8view.jpeg">
+<meta property="og:url" content="https://danaplatform.github.io/danaplatform/index.html">
 <meta property="og:type" content="website">
 
-<!-- TWITTER CARD (bonus bagus untuk share) -->
+<!-- TWITTER -->
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DANA PLATFORM">
+<meta name="twitter:description" content="Layanan digital DANA PLATFORM.">
+<meta name="twitter:image" content="https://danaplatform.github.io/danaplatform/logo8view.jpeg">
 
-<!-- FAVICON (ICON TAB BROWSER) -->
-<link rel="icon" type="image/png" href="https://rupiahsegar.sbs/rupiahsegar-view.jpg">
-<link rel="shortcut icon" type="image/png" href="https://rupiahsegar.sbs/rupiahsegar-view.jpg">
-<link rel="apple-touch-icon" href="https://rupiahsegar.sbs/rupiahsegar-view.jpg">
-<link rel="icon" href="/favicon.ico">
+<!-- FAVICON / ICON TAB -->
+<link rel="icon" type="image/jpeg" href="./logo8view.jpeg?v=2">
+<link rel="shortcut icon" type="image/jpeg" href="./logo8view.jpeg?v=2">
+<link rel="apple-touch-icon" href="./logo8view.jpeg?v=2">
+
 <!-- THEME -->
 <meta name="theme-color" content="#b10808">
-
-<!-- STRUCTURED DATA (GOOGLE LOGO) -->
+<!-- STRUCTURED DATA -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Pinjamanku",
-  "url": "https://rupiahsegar.sbs",
-  "logo": "https://rupiahsegar.sbs/rupiahsegar-view.jpg"
+  "name": "DANA PLATFORM",
+  "url": "https://danaplatform.github.io/danaplatform/",
+  "logo": "https://danaplatform.github.io/danaplatform/logo8view.jpeg"
 }
 </script>
+
 
 <title>Pinjamanku - Pinjaman Anda</title>
 
@@ -153,9 +159,9 @@ html, body {
 .logo-desc{
   font-size: 11px;
 
-  color: #ffd6d6;
+  color: #ffffff;
 
-  font-weight: 500;
+  font-weight: 400;
 
   margin-top: 2px;
 
@@ -185,7 +191,7 @@ html, body {
 .header-left {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 9px;
   margin-left: 6px; /* tambahan biar tidak terlalu nempel kiri */
 }
 
@@ -267,7 +273,7 @@ html, body {
   width: 50vw;
   height: 20vh;
 
-  background: #b10808;
+  background: #767676;
   color: #ffffff;
 
   flex-direction: column;
@@ -326,7 +332,7 @@ html, body {
   margin-top: auto;
   padding: 14px;
   text-align: center;
-  background: #f48639;
+  background: #b10808;
   border-radius: 8px;
 }
 
@@ -462,7 +468,7 @@ html, body {
   font-weight:bold;
   font-size:18px;
   margin-bottom:15px;
-  color:#c40000;
+  color:#0872b1;
 }
 
 .row{
@@ -626,13 +632,9 @@ html, body {
   align-items: center;
   gap: 8px;
 
-  background: linear-gradient(
-    135deg,
-    #ffffff,
-    #ff9b9b
-  );
+  background:linear-gradient( 135deg, #ffffff, #ff6464 );
 
-  border: 1px solid #ffd0d0;
+  border: 1px solid #ff0000;
 
   padding: 10px 16px;
 
@@ -1121,7 +1123,7 @@ html, body {
 }
 
 .nav-item:hover{
-  color:#c40000;
+  color:#87bad7;
 }
 
 
@@ -1922,7 +1924,10 @@ img, .logo-admin, .icon {
 .bottom-nav .nav-item img {
   object-fit: contain;
   transition: transform .2s ease;
+  background: #c7c2ff;
+  border-radius: 10px;
 }
+
 
 
 /* NAVIGASI 3 HALAMAN TERPISAH: Pinjaman Anda */
@@ -2373,6 +2378,7 @@ const firebaseConfig = {
   messagingSenderId: "937287862152",
   appId: "1:937287862152:web:7ea55a1e90be67c3591c3d"
 };
+
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -2920,7 +2926,7 @@ window.showKontak = function () {
       margin-top:10px;
       line-height:1.7;
     ">
-      Tim layanan pelanggan Kilatcash siap membantu
+      Tim layanan pelanggan Rupiahsegar siap membantu
       kebutuhan informasi dan kendala pengguna secara profesional.
     </p>
 
@@ -3024,7 +3030,7 @@ window.showKontak = function () {
 
         showToast(\`
           <div class='toast-wrap'>
-            <img src='of7e1ypd4vjyups8g2qb.png' class='toast-logo'>
+            <img src='https://res.cloudinary.com/djxlbemky/image/upload/v1791907851/uly0qmc8iykbd8cuzvux.webp' class='toast-logo'>
             <span>Email berhasil disalin</span>
           </div>
         \`);
@@ -3125,7 +3131,7 @@ window.showKontak = function () {
 
         showToast(\`
           <div class='toast-wrap'>
-            <img src='of7e1ypd4vjyups8g2qb.png' class='toast-logo'>
+            <img src='https://res.cloudinary.com/djxlbemky/image/upload/v1791907851/uly0qmc8iykbd8cuzvux.webp' class='toast-logo'>
             <span>Nomor WhatsApp berhasil disalin</span>
           </div>
         \`);
@@ -3243,7 +3249,7 @@ window.showKontak = function () {
     box-shadow:0 4px 12px rgba(0,0,0,0.04);
   ">
 
-    Dengan menggunakan layanan Kilatcash,
+    Dengan menggunakan layanan Rupiahsegar,
     pengguna dianggap telah membaca dan menyetujui
     kebijakan privasi serta ketentuan layanan yang berlaku.
 
@@ -3357,11 +3363,11 @@ window.showKetentuan = async function(){
   line-height:1.8;
   text-align:left;
 ">
-Dalam rangka meningkatkan kualitas layanan, <b style="color:#b10808;">Kilatcash</b> berkomitmen untuk melindungi serta menjaga kerahasiaan data pribadi setiap pengguna. Kebijakan ini menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi informasi pengguna selama menggunakan layanan kami.
+Dalam rangka meningkatkan kualitas layanan, <b style="color:#b10808;">Rupiahsegar</b> berkomitmen untuk melindungi serta menjaga kerahasiaan data pribadi setiap pengguna. Kebijakan ini menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi informasi pengguna selama menggunakan layanan kami.
 
 <br><br>
 
-Dengan menggunakan layanan <b style="color:#b10808;">Kilatcash</b>, pengguna dianggap telah membaca, memahami, dan menyetujui kebijakan privasi serta syarat layanan yang berlaku demi menciptakan keamanan dan kenyamanan bersama.
+Dengan menggunakan layanan <b style="color:#b10808;">Rupiahsegar</b>, pengguna dianggap telah membaca, memahami, dan menyetujui kebijakan privasi serta syarat layanan yang berlaku demi menciptakan keamanan dan kenyamanan bersama.
 </p>
 
   </div>
@@ -3671,7 +3677,7 @@ Dengan menggunakan layanan <b style="color:#b10808;">Kilatcash</b>, pengguna dia
     color:#4b5563;
     line-height:1.8;
   ">
-    Kilatcash menggunakan sistem keamanan berlapis untuk menjaga data pengguna
+    Rupiahsegar menggunakan sistem keamanan berlapis untuk menjaga data pengguna
     tetap aman dari akses tidak sah, perubahan, maupun penyalahgunaan data.
   </div>
 
@@ -3798,7 +3804,7 @@ Dengan menggunakan layanan <b style="color:#b10808;">Kilatcash</b>, pengguna dia
         line-height:1.9;
         text-align:left;
       ">
-        <b style="color:#b10808;">Kilatcash</b> berkomitmen untuk menghormati
+        <b style="color:#b10808;">Rupiahsegar</b> berkomitmen untuk menghormati
         privasi serta melindungi hak setiap pengguna dalam menggunakan layanan kami.
         Pengguna memiliki hak penuh untuk mengelola informasi dan aktivitas akun
         secara aman, transparan, dan sesuai dengan kebijakan yang berlaku.
@@ -3957,7 +3963,7 @@ Dengan menggunakan layanan <b style="color:#b10808;">Kilatcash</b>, pengguna dia
 
         <h3 style="color:#111;">Penutup</h3>
         <p>
-          Dengan menggunakan layanan Kilatcash, Anda dianggap telah membaca dan menyetujui seluruh 
+          Dengan menggunakan layanan Rupiahsegar, Anda dianggap telah membaca dan menyetujui seluruh 
           ketentuan yang berlaku dalam kebijakan ini.
         </p>
 
@@ -4213,7 +4219,7 @@ function copyOrder() {
 
     showToast(`
       <div class="toast-wrap">
-        <img src="of7e1ypd4vjyups8g2qb.png" class="toast-logo">
+        <img src="https://res.cloudinary.com/xxrnxf10/image/upload/v1793430970/ytalpgxwynituubc0fik.jpg" class="toast-logo">
         <span>Order ID tidak ditemukan</span>
       </div>
     `, "#f44336");
@@ -4230,7 +4236,7 @@ function copyOrder() {
 
       showToast(`
         <div class="toast-wrap">
-          <img src="of7e1ypd4vjyups8g2qb.png" class="toast-logo">
+          <img src="https://res.cloudinary.com/xxrnxf10/image/upload/v1793430970/ytalpgxwynituubc0fik.jpg" class="toast-logo">
           <span>Order ID berhasil disalin</span>
         </div>
       `);
@@ -4241,7 +4247,7 @@ function copyOrder() {
 
       showToast(`
         <div class="toast-wrap">
-          <img src="of7e1ypd4vjyups8g2qb.png" class="toast-logo">
+          <img src="https://res.cloudinary.com/xxrnxf10/image/upload/v1793430970/ytalpgxwynituubc0fik.jpg" class="toast-logo">
           <span>Gagal menyalin Order ID</span>
         </div>
       `, "#f44336");
@@ -4267,7 +4273,7 @@ document.addEventListener("click", function (e) {
 
       showToast(`
         <div class="toast-wrap">
-          <img src="of7e1ypd4vjyups8g2qb.png" class="toast-logo">
+          <img src="https://res.cloudinary.com/xxrnxf10/image/upload/v1793430970/ytalpgxwynituubc0fik.jpg" class="toast-logo">
           <span>Kode VA tidak tersedia</span>
         </div>
       `, "#f44336");
@@ -4282,7 +4288,7 @@ document.addEventListener("click", function (e) {
 
         showToast(`
           <div class="toast-wrap">
-            <img src="of7e1ypd4vjyups8g2qb.png" class="toast-logo">
+            <img src="https://res.cloudinary.com/xxrnxf10/image/upload/v1793430970/ytalpgxwynituubc0fik.jpg" class="toast-logo">
             <span>Kode VA berhasil disalin</span>
           </div>
         `);
@@ -4355,7 +4361,7 @@ function kirimCS(){
   let nomorCS = "6283863319230"; // ganti dengan nomor CS kamu
 
   let text =
-`Halo CS Kilatcash, saya butuh bantuan!
+`Halo CS Rupiahsegar, saya butuh bantuan!
 
 Nomor HP Terdaftar : ${hp}
 Kategori Bantuan : ${kategori}
@@ -4459,7 +4465,7 @@ window.showKeluar = function(){
   padding:12px;
   border:none;
   border-radius:12px;
-  background:#dc2626;
+  background:#0872b1;
   color:white;
   font-weight:600;
   cursor:pointer;
@@ -4732,7 +4738,7 @@ if(loader){
 
   <!-- Footer -->
 <footer id="copyright">
-  © 2026 <span>Kilatcash</span> • All Rights Reserved
+  © 2026 <span>Rupiahsegar</span> • All Rights Reserved
 </footer>
 </div>
 </body>

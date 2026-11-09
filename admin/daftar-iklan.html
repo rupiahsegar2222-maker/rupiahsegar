@@ -1,0 +1,1252 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0c85ff">
+<title>Daftar Iklan - Admin</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f3f6fc;
+  color: #202938;
+  min-height: 100vh;
+}
+
+button, input, textarea {
+  font-family: inherit;
+}
+
+.top-header {
+  background: linear-gradient(120deg, #0879ed, #0c85ff);
+  color: white;
+  padding: 20px 18px 25px;
+}
+
+.header-inner {
+  max-width: 850px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.back-button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,.3);
+  background: rgba(255,255,255,.13);
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.header-title h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.header-title p {
+  font-size: 11px;
+  opacity: .85;
+  margin-top: 3px;
+}
+
+.container {
+  width: calc(100% - 28px);
+  max-width: 850px;
+  margin: 20px auto 45px;
+}
+
+.panel {
+  background: white;
+  border-radius: 17px;
+  padding: 19px;
+  box-shadow: 0 4px 18px rgba(25, 50, 90, .055);
+  margin-bottom: 18px;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 17px;
+}
+
+.panel-heading .heading-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: #eaf4ff;
+  color: #0c85ff;
+  font-size: 16px;
+}
+
+.panel-heading h3 {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.panel-heading p {
+  color: #8993a3;
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid #e1e7ef;
+  border-radius: 11px;
+  padding: 12px;
+  outline: none;
+  font-size: 12px;
+  color: #263244;
+  background: #fbfcfe;
+  transition: .2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #0c85ff;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(12,133,255,.08);
+}
+
+.form-group textarea {
+  min-height: 220px;
+  resize: vertical;
+  font-family: Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.form-hint {
+  color: #929cac;
+  font-size: 10px;
+  margin-top: 6px;
+}
+
+.primary-button {
+  width: 100%;
+  border: none;
+  border-radius: 11px;
+  padding: 13px;
+  background: #0c85ff;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.primary-button:hover {
+  background: #006fe0;
+}
+
+.primary-button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.cancel-edit {
+  width: 100%;
+  margin-top: 9px;
+  padding: 11px;
+  border: 1px solid #e3e8ef;
+  border-radius: 10px;
+  background: white;
+  color: #596579;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: none;
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.list-header h3 {
+  font-size: 15px;
+}
+
+.total-badge {
+  background: #eaf4ff;
+  color: #0879ed;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.search-box {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.search-box i {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #98a3b3;
+  font-size: 13px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 11px 12px 11px 36px;
+  border: 1px solid #e4e9f0;
+  border-radius: 10px;
+  background: #fbfcfe;
+  outline: none;
+  font-size: 11px;
+}
+
+.search-box input:focus {
+  border-color: #0c85ff;
+}
+
+.ad-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ad-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  border: 1px solid #edf0f5;
+  border-radius: 13px;
+  cursor: pointer;
+  transition: .2s;
+  background: white;
+}
+
+.ad-item:hover {
+  border-color: #acd5ff;
+  background: #f8fbff;
+}
+
+.ad-number {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 11px;
+  background: #eaf4ff;
+  color: #0c85ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ad-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ad-info h4 {
+  font-size: 12px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ad-info p {
+  color: #929cac;
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.ad-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.icon-button {
+  width: 33px;
+  height: 33px;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.edit-button {
+  background: #fff5e7;
+  color: #e99a21;
+}
+
+.delete-button {
+  background: #fff0f0;
+  color: #e34c4c;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 35px 15px;
+  color: #98a3b3;
+}
+
+.empty-state i {
+  font-size: 32px;
+  margin-bottom: 12px;
+  color: #c6d5e7;
+}
+
+.empty-state h4 {
+  font-size: 12px;
+  color: #697586;
+  margin-bottom: 4px;
+}
+
+.empty-state p {
+  font-size: 10px;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 25px;
+  color: #8b96a6;
+  font-size: 11px;
+}
+
+.loading-state i {
+  margin-right: 6px;
+}
+
+/* POPUP KODE FULL SCREEN */
+.code-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #f3f6fc;
+  display: none;
+  flex-direction: column;
+}
+
+.code-modal.active {
+  display: flex;
+}
+
+.code-modal-header {
+  min-height: 62px;
+  padding: 10px 15px;
+  background: white;
+  border-bottom: 1px solid #e8edf4;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.modal-close {
+  width: 37px;
+  height: 37px;
+  border: none;
+  background: #f0f3f8;
+  color: #475569;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.modal-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.modal-title h3 {
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modal-title p {
+  font-size: 9px;
+  color: #98a3b3;
+  margin-top: 2px;
+}
+
+.copy-button {
+  padding: 10px 13px;
+  border: none;
+  background: #0c85ff;
+  color: white;
+  border-radius: 9px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.copy-button i {
+  margin-right: 5px;
+}
+
+.code-modal-body {
+  flex: 1;
+  min-height: 0;
+  padding: 13px;
+  display: flex;
+}
+
+.code-display {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  outline: none;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #151d2b;
+  color: #d8e6f7;
+  padding: 17px;
+  font-family: Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  white-space: pre;
+  overflow: auto;
+  tab-size: 2;
+}
+
+.toast-container {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000001;
+  width: calc(100% - 30px);
+  max-width: 380px;
+  pointer-events: none;
+}
+
+.toast {
+  background: #202b3c;
+  color: white;
+  border-radius: 11px;
+  padding: 12px 15px;
+  font-size: 11px;
+  box-shadow: 0 7px 25px rgba(0,0,0,.15);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  animation: toastIn .25s ease;
+}
+
+.toast.success i {
+  color: #4ade80;
+}
+
+.toast.error i {
+  color: #ff7777;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* KONFIRMASI */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000000;
+  background: rgba(15, 23, 42, .48);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.confirm-overlay.active {
+  display: flex;
+}
+
+.confirm-box {
+  width: 100%;
+  max-width: 330px;
+  background: white;
+  border-radius: 17px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 15px 50px rgba(0,0,0,.15);
+}
+
+.confirm-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: #fff0f0;
+  color: #e34c4c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+}
+
+.confirm-box h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.confirm-box p {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #8792a2;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.confirm-actions button {
+  flex: 1;
+  border: none;
+  border-radius: 9px;
+  padding: 11px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.confirm-cancel {
+  background: #eef1f5;
+  color: #596579;
+}
+
+.confirm-delete {
+  background: #e34c4c;
+  color: white;
+}
+
+@media (max-width: 480px) {
+  .top-header {
+    padding: 17px 15px 22px;
+  }
+
+  .container {
+    width: calc(100% - 22px);
+    margin-top: 13px;
+  }
+
+  .panel {
+    padding: 15px;
+    border-radius: 14px;
+  }
+
+  .ad-item {
+    padding: 10px;
+  }
+
+  .ad-actions {
+    gap: 4px;
+  }
+
+  .icon-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .code-modal-header {
+    padding: 9px;
+    gap: 8px;
+  }
+
+  .copy-button {
+    padding: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="top-header">
+  <div class="header-inner">
+    <button class="back-button" onclick="window.location.href='index.html'" aria-label="Kembali">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+
+    <div class="header-title">
+      <h2>Daftar Iklan</h2>
+      <p>Kelola dan simpan kode iklan Anda</p>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- FORM TAMBAH IKLAN -->
+  <section class="panel">
+    <div class="panel-heading">
+      <div class="heading-icon">
+        <i class="fa-solid fa-pen-to-square"></i>
+      </div>
+      <div>
+        <h3 id="formHeading">Tambah Iklan Baru</h3>
+        <p>Masukkan judul dan kode iklan</p>
+      </div>
+    </div>
+
+    <form id="adForm">
+      <div class="form-group">
+        <label for="adTitle">Judul Iklan</label>
+        <input
+          type="text"
+          id="adTitle"
+          placeholder="Contoh: Iklan Promo Oktober"
+          maxlength="100"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="adCode">Kode Iklan (HTML / CSS / JS)</label>
+        <textarea
+          id="adCode"
+          placeholder="Masukkan seluruh kode iklan di sini..."
+          spellcheck="false"
+          required
+        ></textarea>
+        <div class="form-hint">
+          Kode akan disimpan ke Firebase dan format aslinya akan dipertahankan.
+        </div>
+      </div>
+
+      <button type="submit" class="primary-button" id="saveButton">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <span>Simpan Iklan</span>
+      </button>
+
+      <button type="button" class="cancel-edit" id="cancelEditButton">
+        Batalkan Edit
+      </button>
+    </form>
+  </section>
+
+  <!-- DAFTAR IKLAN -->
+  <section class="panel">
+    <div class="list-header">
+      <h3><i class="fa-solid fa-folder-open" style="color:#0c85ff;margin-right:7px"></i> Iklan Tersimpan</h3>
+      <span class="total-badge" id="totalAds">0 Iklan</span>
+    </div>
+
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="searchAd" placeholder="Cari nama iklan...">
+    </div>
+
+    <div id="adList" class="ad-list">
+      <div class="loading-state">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Menghubungkan ke Firebase...
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- POPUP KODE FULL SCREEN -->
+<div class="code-modal" id="codeModal">
+  <div class="code-modal-header">
+    <button class="modal-close" id="closeCodeModal" aria-label="Tutup">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+
+    <div class="modal-title">
+      <h3 id="modalAdTitle">Kode Iklan</h3>
+      <p>Isi kode iklan tersimpan</p>
+    </div>
+
+    <button class="copy-button" id="copyCodeButton">
+      <i class="fa-regular fa-copy"></i>
+      Copy Kode
+    </button>
+  </div>
+
+  <div class="code-modal-body">
+    <textarea class="code-display" id="codeDisplay" readonly spellcheck="false"></textarea>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- KONFIRMASI HAPUS -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-icon">
+      <i class="fa-solid fa-trash-can"></i>
+    </div>
+    <h3>Hapus Iklan?</h3>
+    <p>Iklan ini akan dihapus dari Firebase secara permanen. Tindakan ini tidak dapat dibatalkan.</p>
+
+    <div class="confirm-actions">
+      <button class="confirm-cancel" id="cancelDelete">Batal</button>
+      <button class="confirm-delete" id="confirmDelete">Ya, Hapus</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  orderBy,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+/* ==========================================
+   1. KONFIGURASI FIREBASE
+   GANTI DENGAN CONFIG FIREBASE PROYEK KAMU
+========================================== */
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "datapinjam-c6008.firebaseapp.com",
+  projectId: "datapinjam-c6008",
+  storageBucket: "datapinjam-c6008.appspot.com",
+  messagingSenderId: "937287862152",
+  appId: "1:937287862152:web:7ea55a1e90be67c3591c3d",
+  databaseURL: "https://datapinjam-c6008-default-rtdb.firebaseio.com/"
+};
+
+
+
+/* ==========================================
+   2. INISIALISASI FIREBASE
+========================================== */
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+/* ==========================================
+   3. REFERENSI ELEMEN
+========================================== */
+
+const adForm = document.getElementById("adForm");
+const adTitle = document.getElementById("adTitle");
+const adCode = document.getElementById("adCode");
+const adList = document.getElementById("adList");
+const totalAds = document.getElementById("totalAds");
+const searchAd = document.getElementById("searchAd");
+
+const saveButton = document.getElementById("saveButton");
+const cancelEditButton = document.getElementById("cancelEditButton");
+const formHeading = document.getElementById("formHeading");
+
+const codeModal = document.getElementById("codeModal");
+const modalAdTitle = document.getElementById("modalAdTitle");
+const codeDisplay = document.getElementById("codeDisplay");
+
+const toastContainer = document.getElementById("toastContainer");
+
+const confirmOverlay = document.getElementById("confirmOverlay");
+const cancelDelete = document.getElementById("cancelDelete");
+const confirmDelete = document.getElementById("confirmDelete");
+
+
+/* ==========================================
+   4. VARIABEL
+========================================== */
+
+const adsCollection = collection(db, "daftar_iklan");
+
+let adsData = [];
+let currentEditingId = null;
+let currentOpenedCode = "";
+let pendingDeleteId = null;
+
+
+/* ==========================================
+   5. ENCODE DAN DECODE KODE
+========================================== */
+
+function encodeCode(value) {
+  return btoa(unescape(encodeURIComponent(value)));
+}
+
+function decodeCode(value) {
+  try {
+    return decodeURIComponent(escape(atob(value)));
+  } catch (error) {
+    return value || "";
+  }
+}
+
+
+/* ==========================================
+   6. NOTIFIKASI TOAST
+========================================== */
+
+function showToast(message, type = "success") {
+  toastContainer.innerHTML = "";
+
+  const toast = document.createElement("div");
+  toast.className = `toast ${type}`;
+
+  const icon = document.createElement("i");
+  icon.className = type === "success"
+    ? "fa-solid fa-circle-check"
+    : "fa-solid fa-circle-exclamation";
+
+  const text = document.createElement("span");
+  text.textContent = message;
+
+  toast.append(icon, text);
+  toastContainer.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
+}
+
+
+/* ==========================================
+   7. FORMAT TANGGAL
+========================================== */
+
+function formatDate(timestamp) {
+  if (!timestamp || typeof timestamp.toDate !== "function") {
+    return "Baru saja";
+  }
+
+  return timestamp.toDate().toLocaleString("id-ID", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
+
+/* ==========================================
+   8. RESET FORM
+========================================== */
+
+function resetForm() {
+  adForm.reset();
+  currentEditingId = null;
+
+  formHeading.textContent = "Tambah Iklan Baru";
+
+  saveButton.innerHTML = `
+    <i class="fa-solid fa-cloud-arrow-up"></i>
+    <span>Simpan Iklan</span>
+  `;
+
+  cancelEditButton.style.display = "none";
+}
+
+cancelEditButton.addEventListener("click", resetForm);
+
+
+/* ==========================================
+   9. SIMPAN IKLAN KE FIREBASE
+========================================== */
+
+adForm.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const judul = adTitle.value.trim();
+  const code = adCode.value;
+
+  if (!judul) {
+    showToast("Judul iklan belum diisi.", "error");
+    adTitle.focus();
+    return;
+  }
+
+  if (!code.trim()) {
+    showToast("Kode iklan belum diisi.", "error");
+    adCode.focus();
+    return;
+  }
+
+  saveButton.disabled = true;
+  saveButton.innerHTML = `
+    <i class="fa-solid fa-spinner fa-spin"></i>
+    <span>Menyimpan...</span>
+  `;
+
+  try {
+    const encodedCode = encodeCode(code);
+
+    if (currentEditingId) {
+      const adRef = doc(db, "daftar_iklan", currentEditingId);
+
+      await updateDoc(adRef, {
+        judul: judul,
+        code: encodedCode,
+        diperbarui: serverTimestamp()
+      });
+
+      showToast("Iklan berhasil diperbarui.");
+    } else {
+      await addDoc(adsCollection, {
+        judul: judul,
+        code: encodedCode,
+        dibuat: serverTimestamp(),
+        diperbarui: serverTimestamp()
+      });
+
+      showToast("Iklan berhasil disimpan ke Firebase.");
+    }
+
+    resetForm();
+
+  } catch (error) {
+    console.error("Gagal menyimpan iklan:", error);
+    showToast("Gagal menyimpan iklan. Periksa koneksi dan konfigurasi Firebase.", "error");
+  } finally {
+    saveButton.disabled = false;
+
+    if (!currentEditingId) {
+      saveButton.innerHTML = `
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <span>Simpan Iklan</span>
+      `;
+    }
+  }
+});
+
+
+/* ==========================================
+   10. AMBIL DATA REALTIME FIREBASE
+========================================== */
+
+const adsQuery = query(
+  adsCollection,
+  orderBy("dibuat", "desc")
+);
+
+onSnapshot(adsQuery, (snapshot) => {
+  adsData = snapshot.docs.map((item) => ({
+    id: item.id,
+    ...item.data()
+  }));
+
+  renderAds();
+
+}, (error) => {
+  console.error("Gagal mengambil daftar iklan:", error);
+
+  adList.innerHTML = `
+    <div class="empty-state">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <h4>Gagal memuat iklan</h4>
+      <p>Periksa konfigurasi Firebase dan koneksi internet.</p>
+    </div>
+  `;
+
+  showToast("Gagal terhubung ke Firestore.", "error");
+});
+
+
+/* ==========================================
+   11. TAMPILKAN DAFTAR IKLAN
+========================================== */
+
+function renderAds() {
+  const keyword = searchAd.value.trim().toLowerCase();
+
+  const filteredAds = adsData.filter((ad) =>
+    (ad.judul || "").toLowerCase().includes(keyword)
+  );
+
+  totalAds.textContent = `${adsData.length} Iklan`;
+
+  if (filteredAds.length === 0) {
+    adList.innerHTML = `
+      <div class="empty-state">
+        <i class="fa-regular fa-folder-open"></i>
+        <h4>${keyword ? "Iklan tidak ditemukan" : "Belum ada iklan"}</h4>
+        <p>${keyword ? "Coba gunakan kata pencarian lain." : "Iklan yang kamu simpan akan muncul di sini."}</p>
+      </div>
+    `;
+    return;
+  }
+
+  adList.innerHTML = "";
+
+  filteredAds.forEach((ad, index) => {
+    const item = document.createElement("div");
+    item.className = "ad-item";
+
+    const number = document.createElement("div");
+    number.className = "ad-number";
+    number.innerHTML = `<i class="fa-solid fa-file-code"></i>`;
+
+    const info = document.createElement("div");
+    info.className = "ad-info";
+
+    const title = document.createElement("h4");
+    title.textContent = ad.judul || "Tanpa Judul";
+
+    const date = document.createElement("p");
+    date.textContent = formatDate(ad.diperbarui || ad.dibuat);
+
+    info.append(title, date);
+
+    const actions = document.createElement("div");
+    actions.className = "ad-actions";
+
+    const editBtn = document.createElement("button");
+    editBtn.className = "icon-button edit-button";
+    editBtn.type = "button";
+    editBtn.title = "Edit iklan";
+    editBtn.innerHTML = `<i class="fa-solid fa-pen"></i>`;
+
+    editBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      editAd(ad.id);
+    });
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "icon-button delete-button";
+    deleteBtn.type = "button";
+    deleteBtn.title = "Hapus iklan";
+    deleteBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+
+    deleteBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      askDeleteAd(ad.id);
+    });
+
+    actions.append(editBtn, deleteBtn);
+    item.append(number, info, actions);
+
+    item.addEventListener("click", () => {
+      openAdCode(ad);
+    });
+
+    adList.appendChild(item);
+  });
+}
+
+searchAd.addEventListener("input", renderAds);
+
+
+/* ==========================================
+   12. BUKA POPUP KODE IKLAN
+========================================== */
+
+function openAdCode(ad) {
+  currentOpenedCode = decodeCode(ad.code || "");
+
+  modalAdTitle.textContent = ad.judul || "Kode Iklan";
+  codeDisplay.value = currentOpenedCode;
+
+  codeModal.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeCodeModal() {
+  codeModal.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("closeCodeModal").addEventListener("click", closeCodeModal);
+
+
+/* ==========================================
+   13. COPY SELURUH KODE IKLAN
+========================================== */
+
+document.getElementById("copyCodeButton").addEventListener("click", async function() {
+  if (!currentOpenedCode) {
+    showToast("Tidak ada kode untuk disalin.", "error");
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(currentOpenedCode);
+    showToast("Seluruh kode iklan berhasil disalin.");
+  } catch (error) {
+    codeDisplay.focus();
+    codeDisplay.select();
+
+    const copied = document.execCommand("copy");
+
+    if (copied) {
+      showToast("Seluruh kode iklan berhasil disalin.");
+    } else {
+      showToast("Gagal menyalin kode.", "error");
+    }
+  }
+});
+
+
+/* ==========================================
+   14. EDIT IKLAN
+========================================== */
+
+function editAd(id) {
+  const ad = adsData.find(item => item.id === id);
+
+  if (!ad) {
+    showToast("Data iklan tidak ditemukan.", "error");
+    return;
+  }
+
+  currentEditingId = id;
+
+  adTitle.value = ad.judul || "";
+  adCode.value = decodeCode(ad.code || "");
+
+  formHeading.textContent = "Edit Iklan";
+
+  saveButton.innerHTML = `
+    <i class="fa-solid fa-floppy-disk"></i>
+    <span>Simpan Perubahan</span>
+  `;
+
+  cancelEditButton.style.display = "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  adTitle.focus();
+}
+
+
+/* ==========================================
+   15. KONFIRMASI HAPUS
+========================================== */
+
+function askDeleteAd(id) {
+  pendingDeleteId = id;
+  confirmOverlay.classList.add("active");
+}
+
+function closeDeleteConfirm() {
+  confirmOverlay.classList.remove("active");
+  pendingDeleteId = null;
+}
+
+cancelDelete.addEventListener("click", closeDeleteConfirm);
+
+confirmOverlay.addEventListener("click", (e) => {
+  if (e.target === confirmOverlay) {
+    closeDeleteConfirm();
+  }
+});
+
+
+/* ==========================================
+   16. HAPUS IKLAN DARI FIREBASE
+========================================== */
+
+confirmDelete.addEventListener("click", async function() {
+  if (!pendingDeleteId) return;
+
+  const id = pendingDeleteId;
+
+  confirmDelete.disabled = true;
+  confirmDelete.textContent = "Menghapus...";
+
+  try {
+    await deleteDoc(doc(db, "daftar_iklan", id));
+
+    if (currentEditingId === id) {
+      resetForm();
+    }
+
+    if (codeModal.classList.contains("active")) {
+      closeCodeModal();
+    }
+
+    showToast("Iklan berhasil dihapus dari Firebase.");
+
+  } catch (error) {
+    console.error("Gagal menghapus iklan:", error);
+    showToast("Gagal menghapus iklan.", "error");
+
+  } finally {
+    confirmDelete.disabled = false;
+    confirmDelete.textContent = "Ya, Hapus";
+    closeDeleteConfirm();
+  }
+});
+
+
+/* ==========================================
+   17. TUTUP POPUP DENGAN TOMBOL ESC
+========================================== */
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    if (codeModal.classList.contains("active")) {
+      closeCodeModal();
+    }
+
+    if (confirmOverlay.classList.contains("active")) {
+      closeDeleteConfirm();
+    }
+  }
+});
+
+</script>
+
+</body>
+</html>

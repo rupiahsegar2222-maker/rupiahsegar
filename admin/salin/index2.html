@@ -1,0 +1,2554 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2e00c5">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Admin Panel Tagihan</title>
+
+<style>
+body {
+  margin: 0;
+  background: #eef2f7;
+  font-family: 'Segoe UI', sans-serif;
+  
+  
+}
+
+
+
+
+.top-bar {
+  height: 60px;
+  padding-top: env(safe-area-inset-top);
+  background: linear-gradient(135deg, #2e00c5, #6a11cb, #2575fc);
+}
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  width:230px;
+  height:100vh;
+  background:linear-gradient(180deg,#0f172a,#1e293b);
+  color:#fff;
+  position:fixed;
+  padding:20px;
+  border-radius: 10px;
+  left: 0;
+  top: 0;
+}
+
+.page {
+  margin-left: 0px;
+}
+
+.sidebar h2 {
+  color:#38bdf8;
+}
+
+.sidebar button {
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:none;
+  border-radius:8px;
+  background:#334155;
+  color:#fff;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.sidebar button:hover {
+  background:#38bdf8;
+}
+
+
+
+.panel-title{
+  display: flex;
+  align-items: center; /* Vertikal rata tengah */
+  gap: 10px;           /* Jarak antara logo dan teks */
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.panel-logo{
+  width: 50px;   /* sesuaikan ukuran logo */
+  height: 50px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+
+
+
+/* CONTENT */
+.content {
+  margin-left:250px;
+  padding:25px;
+}
+
+/* CARD */
+.card {
+  background:#fff;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* TABLE */
+table {
+  width:100%;
+  border-collapse:collapse;
+}
+
+th {
+  background:#0ea5e9;
+  color:#fff;
+}
+
+th, td {
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius: 10px;
+}
+
+/* FORM */
+.grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+input {
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+label {
+  font-size:13px;
+}
+
+.btn {
+  margin-top:20px;
+  padding:12px;
+  width:100%;
+  border:none;
+  border-radius:10px;
+  background:#0ea5e9;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.btn:hover {
+  background:#0284c7;
+}
+
+/* IMAGE PREVIEW */
+.preview {
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:10px;
+  margin-top:5px;
+  display:none;
+}
+
+.card {
+  background: white;
+  color: black;
+}
+
+.menu{
+  padding:0px;
+  background:#c6d5eb;
+  min-height:100vh;
+  font-family:'Segoe UI', sans-serif;
+  margin-top: -40px;
+}
+
+.title{
+  margin-bottom:15px;
+  font-weight:600;
+  color:#333;
+}
+
+/* TABLE */
+.table-container{
+  overflow-x:auto;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
+
+.table-tagihan{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.table-tagihan th{
+  background:#1976d2;
+  color:#fff;
+  padding:12px;
+  font-size:13px;
+  text-align:left;
+}
+
+.table-tagihan td{
+  padding:12px;
+  border-bottom:1px solid #eee;
+  font-size:13px;
+  transition:0.2s;
+}
+
+.table-tagihan tr:hover{
+  background:#f9fbff;
+}
+
+/* EDITABLE */
+.editable{
+  cursor:pointer;
+}
+
+.editable:hover{
+  background:#e3f2fd;
+}
+
+/* STATUS */
+.status{
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:500;
+}
+
+.belum{
+  background:#fff3e0;
+  color:#ef6c00;
+}
+
+.lunas{
+  background:#e8f5e9;
+  color:#2e7d32;
+}
+
+
+
+
+/* BUTTON */
+.btn-hapus{
+  background:#e53935;
+  color:#fff;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.btn-hapus:hover{
+  background:#c62828;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#323232;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:8px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:0.3s;
+  z-index:999;
+}
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.sidebar button{
+  display:block;
+  width:100%;
+  padding:12px;
+  margin:5px 0;
+  border:none;
+  background:#8e8e8ebd;
+  cursor:pointer;
+  transition:0.3s;
+  font-weight:500;
+}
+
+/* 🔵 Hover (kena cursor) */
+.sidebar button:hover{
+  background:#2196f3;
+  color:#fff;
+}
+
+/* 🔴 Aktif (diklik) */
+.sidebar button.active{
+  background:#c62828;
+  color:#fff;
+  font-weight:bold;
+}
+
+
+
+/* Khusus header V bayar1 */
+.v-bayar1 {
+  color: #ffffff; /* merah */
+  font-weight: bold; /* opsional, biar lebih menonjol */
+  background: #c40000;
+}
+
+td[data-field="kodeVA"] {
+  color: #c40000;
+  font-weight: bold;
+  background: #c6c6c6;
+}
+
+
+
+
+
+
+.contact-box{
+  background:#f8fafc;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:0.3s;
+}
+
+.contact-box:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+.contact-box b{
+  font-size:13px;
+  color:#888;
+}
+
+.contact-box p:last-child{
+  font-size:15px;
+  font-weight:600;
+  color:#111;
+}
+.note {
+  font-size: 12px;
+  color: #888;
+  margin-top: 15px;
+}
+
+
+.setting-card{
+  background:#ffffff;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+  max-width:400px;
+  margin-top:20px;
+}
+
+.setting-title{
+  margin-bottom:15px;
+  font-size:18px;
+  font-weight:600;
+  color:#222;
+}
+
+/* FORM */
+.form-group{
+  margin-bottom:15px;
+}
+
+.form-group label{
+  display:block;
+  font-size:13px;
+  margin-bottom:5px;
+  color:#666;
+}
+
+.form-group input{
+  width:90%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-size:14px;
+  outline:none;
+  transition:0.3s;
+}
+
+/* efek focus */
+.form-group input:focus{
+  border-color:#0ea5e9;
+  box-shadow:0 0 0 3px rgba(14,165,233,0.15);
+}
+
+/* BUTTON */
+.btn-save{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#c62828;
+  color:#fff;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+/* hover */
+.btn-save:hover{
+  transform:translateY(-1px);
+  box-shadow:0 6px 18px rgba(14,165,233,0.3);
+}
+
+/* klik */
+.btn-save:active{
+  transform:scale(0.98);
+}
+
+
+/* ===== VS CODE STYLE ===== */
+.vscode-container{
+  position: fixed;   /* 🔥 ini kunci */
+  top: 0;
+  left: 260px;       /* sesuaikan lebar sidebar admin kamu */
+  right: 0;
+  bottom: 0;
+  
+  display: flex;
+  background: #1e1e1e;
+  color: #ff0000;
+  font-family: Consolas, monospace;
+}
+
+/* SIDEBAR */
+.vscode-sidebar{
+  width: 200px;
+  background: #252526;
+  padding: 10px;
+  border-right: 1px solid #333;
+}
+
+.vscode-sidebar h4{
+  font-size: 12px;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.file-item{
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.file-item:hover{
+  background: #37373d;
+}
+
+/* MAIN EDITOR */
+.vscode-main{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP BAR */
+.vscode-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+
+/* EDITOR */
+#codeEditor{
+  flex: 1;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border: none;
+  outline: none;
+  padding: 15px;
+  font-size: 14px;
+  resize: none;
+}
+
+/* PREVIEW */
+#previewFrame {
+    width: 100%;
+    height: 45%;
+}
+
+
+/* OUTPUT CONTAINER */
+.vscode-output{
+  background:#1e1e1e;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:15px;
+  border:1px solid #333;
+}
+
+/* HEADER */
+.vscode-output-header{
+  background:#2d2d2d;
+  padding:8px 12px;
+  font-size:13px;
+  color:#ccc;
+  border-bottom:1px solid #333;
+}
+
+/* IFRAME */
+.vscode-output-frame{
+  width:100%;
+  height:220px;
+  border:none;
+  background:white;
+}
+
+/* BIKIN PAGE KHUSUS VS CODE FULL */
+#vscode.page{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* HAPUS BATAS CARD KALAU ADA */
+#vscode .card{
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.save-btn{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 12px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  background:#2ecc71;
+  color:white;
+}
+
+.save-icon{
+  width:16px;
+  height:16px;
+}
+
+.warning-text{
+  color:#ff0000;
+  font-size:12px;
+  animation: pulseWarning 1s infinite;
+}
+
+@keyframes pulseWarning{
+  0%,100%{opacity:1;}
+  50%{opacity:0.3;}
+}
+
+.footer{
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  color: #9e9e9e;
+  font-size: 13px;
+  
+}
+
+.footer small{
+  display: block;
+  margin-top: 4px;
+  color: #b0b0b0;
+}
+
+#contactPage{
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  max-width: 400px;
+  margin-top: -20px;
+}
+
+
+
+
+button.logout-btn {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 10px;
+  background: #6e0404d6;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* hover */
+button.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255, 77, 79, 0.35);
+}
+
+/* klik */
+button.logout-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 10px rgba(255, 77, 79, 0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.welcome-box{
+  background: #1b6000;
+  padding: 14px 16px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 15px;
+}
+
+.welcome-content{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 🔹 Logo container */
+.logo-wrap{
+  width: 45px;
+  height: 45px;
+  background: #f1f3f6;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-admin{
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* 🔹 Text */
+.text-wrap{
+  display: flex;
+  flex-direction: column;
+}
+
+.label{
+  font-size: 12px;
+  color: #c1c1c1;
+  margin: 0;
+}
+
+#namaAdmin{
+  margin: 2px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+
+
+/* animasi muncul */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.popup-hapus{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+  backdrop-filter:blur(4px);
+}
+
+.popup-box{
+  width:320px;
+  background:#fff;
+  border-radius:20px;
+  padding:24px;
+  text-align:center;
+  animation:muncul .2s ease;
+  box-shadow:0 10px 35px rgba(0,0,0,0.15);
+}
+
+@keyframes muncul{
+  from{
+    transform:scale(.9);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.icon-hapus{
+  font-size:55px;
+  margin-bottom:10px;
+}
+
+.popup-box h3{
+  margin:0;
+  font-size:22px;
+}
+
+.popup-box p{
+  font-size:14px;
+  color:#666;
+  margin-top:8px;
+}
+
+.popup-btn{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.popup-btn button{
+  flex:1;
+  border:none;
+  padding:12px;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.btn-batal{
+  background:#f1f1f1;
+}
+
+.btn-hapus2{
+  background:#ef4444;
+  color:white;
+}
+
+
+
+
+
+
+
+
+
+.header-card{
+  max-width: 420px;
+  padding: 22px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.header-title{
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #222;
+}
+
+.form-group{
+  margin-bottom: 14px;
+}
+
+.form-group label{
+  display:block;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color:#666;
+}
+
+.form-group input{
+  width:100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: 0.2s;
+}
+
+.form-group input:focus{
+  border-color: #2e00c5;
+  box-shadow: 0 0 0 3px rgba(46,0,197,0.1);
+}
+
+.upload-box{
+  border: 2px dashed #ddd;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.upload-box:hover{
+  border-color: #2e00c5;
+  background: #f8f7ff;
+}
+
+.upload-text{
+  font-size: 12px;
+  color:#888;
+  display:block;
+  margin-top:8px;
+}
+
+.preview-img{
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.btn-primary{
+  width:100%;
+  padding: 12px;
+  border:none;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#2e00c5,#2575fc);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition: 0.2s;
+}
+
+.btn-primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46,0,197,0.25);
+}
+
+
+
+
+</style>
+</head>
+
+<body>
+
+
+
+
+<div class="top-bar"></div>
+<!-- LOGIN MODAL -->
+<!-- LOGIN MODAL BARU -->
+<div id="modalLoginAdminX" style="
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(135deg, #2e00c5, #6a11cb, #2575fc);
+  z-index: 9999;
+  padding: 20px;
+">
+
+  <!-- CARD -->
+<div style="
+  width: 100%;
+  max-width: 380px;
+
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255,255,255,0.25);
+
+  border-radius: 18px;
+  padding: 28px;
+
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  color: #fff;
+  text-align: center;
+">
+
+  <!-- LOGO -->
+  <img src="logo-preview.png"Logo"
+    style="
+      width: 70px;
+      height: 70px;
+      margin-bottom: 12px;
+      border-radius: 50px;
+    "
+  >
+
+  <h2 style="
+    margin-bottom: 18px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  ">
+    Login Admin
+  </h2>
+
+    <!-- INPUT WA -->
+    <input type="text" id="inputAdminWaX" placeholder="Nomor WA"
+    style="
+      width: 80%;
+      padding: 14px;
+      margin: 10px 0;
+
+      border-radius: 10px;
+      border: none;
+      outline: none;
+
+      font-size: 15px;
+    ">
+
+    <!-- PASSWORD -->
+    <input type="password" id="inputAdminPassX" placeholder="Password"
+    style="
+      width: 80%;
+      padding: 14px;
+      margin-bottom: 16px;
+
+      border-radius: 10px;
+      border: none;
+      outline: none;
+
+      font-size: 15px;
+    ">
+
+    <!-- BUTTON LOGIN -->
+    <button id="btnAdminLoginX"
+    style="
+      width: 100%;
+      padding: 14px;
+
+      background: #ff3b30;
+      color: #fff;
+
+      border: none;
+      border-radius: 12px;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    "
+    onmouseover="this.style.transform='translateY(-2px)'"
+    onmouseout="this.style.transform='translateY(0)'"
+    >
+      Login
+    </button>
+
+    <!-- GANTI PASSWORD -->
+    <div style="margin-top: 18px;">
+      <button id="btnGantiPassX" style="
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 13px;
+        opacity: 0.9;
+        cursor: pointer;
+        text-decoration: underline;
+      ">
+        Ganti Password
+      </button>
+    </div>
+<div style="
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 12px;
+  opacity: 0.8;
+  line-height: 1.6;
+">
+  © 2026 Rupiah Segar • All Rights Reserved <br>
+  Developed by <b style="color:#fff;">Pt.digitalind</b>
+</div>
+  </div>
+</div>
+
+
+
+
+<!-- MODAL GANTI PASSWORD -->
+<div id="modalGantiPassX" style="
+  position: fixed;
+  inset: 0;
+  background: rgb(159 159 159);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+">
+  <div style="
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    width:300px;
+    text-align:center;
+  ">
+    <h3>Ganti Password</h3>
+
+<div style="position:relative;">
+  <input type="password" id="oldPassX" placeholder="Password Lama"
+  style="width:90%;padding:10px;margin:8px 0;">
+
+  <img src="pwd_hide_icon.png" 
+  onclick="togglePassX('oldPassX', this)" 
+  style="position:absolute;right:10px;top:50%;transform:translateY(-50%);width:22px;cursor:pointer;">
+</div>
+
+<div style="position:relative;">
+  <input type="password" id="newPassX" placeholder="Password Baru"
+  style="width:90%;padding:10px;margin:8px 0;">
+
+  <img src="pwd_hide_icon.png" 
+  onclick="togglePassX('newPassX', this)" 
+  style="position:absolute;right:10px;top:50%;transform:translateY(-50%);width:22px;cursor:pointer;">
+</div>
+
+<div style="position:relative;">
+  <input type="password" id="confirmPassX" placeholder="Konfirmasi Password"
+  style="width:90%;padding:10px;margin:8px 0;">
+
+  <img src="pwd_hide_icon.png" 
+  onclick="togglePassX('confirmPassX', this)" 
+  style="position:absolute;right:10px;top:50%;transform:translateY(-50%);width:22px;cursor:pointer;">
+</div>
+
+    <button id="btnSubmitPassX"
+    style="margin-top:10px;padding:10px;background:#a80000;color:#fff;border:none;border-radius:8px;width:100%;">
+    Ganti Sekarang
+    </button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2 class="panel-title">
+  <img src="of7e1ypd4vjyups8g2qb.png" alt="Logo" class="panel-logo">
+  KILATCASH PANNEL
+</h2>
+  <button onclick="show('nasabah', this)">Nasabah</button>
+  <button onclick="show('menuTagihan', this)">Tagihan</button>
+  <button onclick="show('form', this)">Tambah Data</button>
+  <button onclick="show('peminjam', this)">Peminjam</button>
+  <button onclick="show('va', this)">Virtual Account</button>
+  <button onclick="window.location.href='https://rupiahsegar.sbs/upload/index.html'">Link Foto</button>
+  <button onclick="show('vscode', this)">Atur Iklan</button>
+  <button onclick="setActiveMenu(event, 'gantilogo')">Ganti Logo</button>
+    <button onclick="setActiveMenu(event, 'contactPage')">Contact</button>
+
+
+
+<div class="welcome-box">
+  <div class="welcome-content">
+    
+    <div class="logo-wrap">
+      <img src="abr.png" class="logo-admin" />
+    </div>
+
+    <div class="text-wrap">
+      <p class="label">Login Sebagai</p>
+      <h3 id="namaAdmin">Memuat...</h3>
+    </div>
+  </div>
+    <button class="logout-btn" onclick="logoutAdminX()">Logout</button>
+
+</div>
+
+
+
+  <footer class="footer">
+  <p>© 2026 Rupiah Segar</p>
+  <small>Developer: Pt.digitalind</small>
+</footer>
+</div>
+
+<div class="content">
+
+<!-- NASABAH -->
+<div id="nasabah" class="card">
+  <h2>Semua Data Nasabah</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>No WA</th>
+        <th>Bank</th>
+        <th>Virtual Account</th>
+        <th class="v-bayar1">VA PEMBAYARAN</th>
+        <th>Order iD</th>
+        <th>Total Pinjaman</th>
+        <th>Total Bayar</th>
+        <th>Tagihan</th>
+        <th>Status</th>
+        <th>Jatuh Tempo</th>
+        <th>Waktu</th>
+        <th>KTP</th>
+        <th>Selfi</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody id="dataNasabah"></tbody>
+  </table>
+</div>
+
+
+
+<!-- POPUP HAPUS -->
+<div id="popupHapus" class="popup-hapus">
+  <div class="popup-box">
+
+    <div class="icon-hapus">🗑️</div>
+
+    <h3>Hapus Data</h3>
+
+    <p>Apakah kamu yakin ingin menghapus data ini?</p>
+
+    <div class="popup-btn">
+      <button class="btn-batal" onclick="tutupPopupHapus()">
+        Batal
+      </button>
+
+      <button class="btn-hapus2" onclick="lanjutHapus()">
+        Ya, Hapus
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<div id="gantilogo" class="card header-card" style="display:none;">
+
+  <div class="header-title">
+    ⚙️ Setting Header
+  </div>
+
+  <!-- LOGO UPLOAD -->
+  <div class="form-group">
+
+    <label>Logo</label>
+
+    <div class="upload-box">
+
+      <input type="file" id="inputLogo" class="file-input">
+
+      <div class="upload-preview">
+        <img id="previewLogo" class="preview-img" style="display:none;">
+        <span class="upload-text">Pilih atau drag gambar logo</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TITLE -->
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" id="inputTitle" placeholder="Masukkan Judul">
+  </div>
+
+  <!-- DESKRIPSI -->
+  <div class="form-group">
+    <label>Deskripsi</label>
+    <input type="text" id="inputDesc" placeholder="Masukkan Deskripsi">
+  </div>
+
+  <!-- BUTTON -->
+  <button onclick="saveHeaderSetting()" class="btn-primary">
+    💾 Simpan Header
+  </button>
+
+</div>
+
+
+
+
+
+<!-- TAGIHAN -->
+<!-- TAGIHAN -->
+<div id="menuTagihan" class="menu" style="display:none; border-radius: 10px;">
+
+  <h2 class="title">Data Tagihan</h2>
+
+  <div class="table-container">
+    <table class="table-tagihan">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Bank</th>
+          <th>No Virtual Account</th>
+          <th>Kode VA</th>
+          <th>Total Pinjam</th>
+          <th>Tagihan</th>
+          <th>Total Bayar</th>
+          <th>Jatuh Tempo</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="dataTagihan"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- FORM -->
+<!-- ================= HTML ================= -->
+<div id="form" class="card" style="display:none;margin-top: -20px;">
+  <h2>Form Nasabah</h2>
+
+  <div class="grid">
+    <input id="nama" placeholder="Nama">
+    <input id="bank" placeholder="Bank">
+    <input id="noWa" type="tel" placeholder="Nomor WA">
+    <input id="nomorVA" placeholder="VA">
+    <input id="totalPinjaman" type="number" placeholder="Total Pinjaman">
+    <input id="totalBayar" type="number" placeholder="Total Bayar">
+    <input id="orderId" placeholder="Order ID">
+    <input id="tagihan" type="number" placeholder="Tagihan">
+    <input id="status" placeholder="Status">
+    <input id="jatuhTempo" type="date">
+    <input id="kodeVA" placeholder="Kode VA">
+
+ <div>
+  <label>Link Foto KTP</label>
+  <input type="text" id="ktp" placeholder="https://...">
+</div>
+
+<div>
+  <label>Link Foto Selfie</label>
+  <input type="text" id="selfie" placeholder="https://...">
+</div>
+
+  </div>
+
+  <button class="btn" onclick="kirimData()">Simpan</button>
+</div>
+
+<!-- PEMINJAM -->
+<div id="peminjam" class="card" style="display:none;">
+<h2>Data Peminjam</h2>
+<div id="dataPeminjam"></div>
+</div>
+
+<!-- VA -->
+<div id="va" class="card" style="display:none;">
+  <h2>Virtual Account</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>Kode VA</th>
+        <th>Tagihan</th>
+        <th>Bank</th>
+      </tr>
+    </thead>
+    <tbody id="dataVA"></tbody>
+  </table>
+</div>
+
+
+
+
+<div id="contactPage" class="page" style="display:none;">
+  <div class="card">
+    <h2>Kontak & Layanan</h2>
+
+    <div class="contact-box">
+      <p><b>Email Support</b></p>
+      <p id="email">-</p>
+    </div>
+
+    <div class="contact-box">
+      <p><b>WhatsApp</b></p>
+      <p id="wa">-</p>
+    </div>
+
+    <div class="contact-box">
+      <p><b>Jam Operasional</b></p>
+      <p id="jam">-</p>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <h3 class="setting-title">Setting Kontak</h3>
+
+    <div class="form-group">
+      <label>Email Support</label>
+      <input type="text" id="emailInput" placeholder="Masukkan Email">
+    </div>
+
+    <div class="form-group">
+      <label>WhatsApp</label>
+      <input type="text" id="waInput" placeholder="Masukkan Nomor WhatsApp">
+    </div>
+
+    <div class="form-group">
+      <label>Jam Operasional</label>
+      <input type="text" id="jamInput" placeholder="Contoh: 24 Jam">
+    </div>
+
+    <button class="btn-save" onclick="window.saveContact()">
+      Simpan
+    </button>
+  </div>
+</div>
+
+
+
+<div id="vscode" class="page" style="display:none;">
+
+  <div class="vscode-container">
+
+    <!-- SIDEBAR -->
+    <div class="vscode-sidebar">
+      <h4>EXPLORER</h4>
+      <div class="file-item">index.html</div>
+      <div class="file-item">style.css</div>
+      <div class="file-item">script.js</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="vscode-main">
+
+      <!-- HEADER -->
+<div class="vscode-header">
+
+  <input type="text" id="judulCode" placeholder="Nama File..."
+  style="padding:6px;border-radius:5px;border:none;">
+
+  <button onclick="simpanCode()" class="save-btn">
+    <img src="ahl.png" class="save-icon"> Save
+  </button>
+
+  <span class="warning-text">
+    ⚠ JANGAN MERUBAH CODE SCRIPT
+  </span>
+
+</div>
+
+      <!-- EDITOR -->
+      <textarea id="codeEditor"></textarea>
+
+      <!-- PREVIEW -->
+      <iframe id="previewFrame"></iframe>
+
+    </div>
+
+  </div>
+
+  <!-- DATA TERSIMPAN -->
+
+</div>
+
+  <div class="card" style="margin-top:15px;">
+    <h3>Data Code Tersimpan</h3>
+    <div id="listCode"></div>
+  </div>
+
+
+</div>
+
+<script type="module">
+
+// APP
+// Firebase App
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+// Firestore
+import { 
+  getFirestore,
+  collection,
+  doc,
+  where,
+  getDocs,
+  getDoc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  query,
+  setDoc,
+  onSnapshot,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// Realtime Database
+import { getDatabase, ref, onValue, get, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+// Storage
+import { 
+  getStorage, 
+  ref as storageRef, 
+  uploadBytesResumable, 
+  getDownloadURL 
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+
+
+// CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "datapinjam-c6008.firebaseapp.com",
+  projectId: "datapinjam-c6008",
+  storageBucket: "datapinjam-c6008.appspot.com",
+  messagingSenderId: "937287862152",
+  appId: "1:937287862152:web:7ea55a1e90be67c3591c3d",
+  databaseURL: "https://datapinjam-c6008-default-rtdb.firebaseio.com/"
+};
+
+
+
+// INIT
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+const realtimeDB = getDatabase(app);
+const storage = getStorage(app);
+
+
+
+
+
+
+async function createMaintenanceField() {
+
+  const maintenanceRef = ref(realtimeDB, "setting/maintenance");
+
+  const snap = await get(maintenanceRef);
+
+  if (!snap.exists()) {
+    await set(maintenanceRef, false);
+    console.log("Field maintenance berhasil dibuat");
+  }
+
+}
+
+createMaintenanceField();
+
+
+
+
+
+
+
+
+
+const CLOUD_NAME = "djxlbemky";
+const UPLOAD_PRESET = "uploadgambar";
+
+async function uploadToCloudinary(file) {
+
+  const form = new FormData();
+  form.append("file", file);
+  form.append("upload_preset", UPLOAD_PRESET);
+
+  const res = await fetch(
+    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+    {
+      method: "POST",
+      body: form
+    }
+  );
+
+  const data = await res.json();
+
+  if (!data.secure_url) {
+    throw new Error("Upload gagal ke Cloudinary");
+  }
+
+  return data.secure_url;
+}
+
+
+// =========================
+// SAVE HEADER
+// =========================
+window.saveHeaderSetting = async function () {
+
+  try {
+
+    const title = document.getElementById("inputTitle").value;
+    const desc = document.getElementById("inputDesc").value;
+    const file = document.getElementById("inputLogo").files[0];
+
+    let logoUrl = "";
+
+    // kalau ada gambar baru
+    if (file) {
+      logoUrl = await uploadToCloudinary(file);
+    }
+
+    await set(ref(realtimeDB, "setting/header"), {
+      title,
+      desc,
+      logo: logoUrl
+    });
+
+    alert("Header berhasil diupdate!");
+
+  } catch (err) {
+    console.error(err);
+    alert("Gagal upload header!");
+  }
+};
+
+window.setActiveMenu = function (e, menu) {
+
+  document.querySelectorAll(".content > div")
+    .forEach(x => x.style.display = "none");
+
+  const target = document.getElementById(menu);
+  if (target) target.style.display = "block";
+
+  document.querySelectorAll(".sidebar button")
+    .forEach(btn => btn.classList.remove("active"));
+
+  e.target.classList.add("active");
+};
+
+
+document.getElementById("inputLogo").addEventListener("change", function(e){
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(evt){
+    const img = document.getElementById("previewLogo");
+    img.src = evt.target.result;
+    img.style.display = "block";
+  };
+  reader.readAsDataURL(file);
+});
+
+
+
+
+
+
+
+
+
+window.addEventListener("load", () => {
+
+  const saved = localStorage.getItem("adminLogin");
+
+  if(saved === "true"){
+    const data = JSON.parse(localStorage.getItem("adminData"));
+
+    currentAdmin = data;
+
+    const namaEl = document.getElementById("namaAdmin");
+    if(namaEl){
+      namaEl.textContent = currentAdmin.namaAdmin || "Admin";
+    }
+
+    document.getElementById("modalLoginAdminX").style.display = "none";
+    document.querySelector(".sidebar").style.display = "block";
+  }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================== BASE64 UTF-8 SAFE ================== */
+function encodeBase64(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+function decodeBase64(str) {
+  return decodeURIComponent(escape(atob(str)));
+}
+
+/* ================== SIMPAN CODE ================== */
+window.simpanCode = async function () {
+  try {
+    const judul = document.getElementById("judulCode").value;
+    const code = document.getElementById("codeEditor").value;
+
+    if (!code) {
+      alert("Code kosong!");
+      return;
+    }
+
+    // 🔥 GANTI addDoc → setDoc (1 document saja)
+    await setDoc(doc(db, "visual_code", "main_code"), {
+      judul: judul || "Tanpa Judul",
+      code: encodeBase64(code),
+      created: new Date()
+    });
+
+    document.getElementById("previewFrame").srcdoc = code;
+
+    alert("Code berhasil disimpan!");
+
+  } catch (err) {
+    console.error("ERROR SIMPAN:", err);
+  }
+};
+
+/* ================== LOAD DATA (ANTI HILANG) ================== */
+const list = document.getElementById("listCode");
+
+// 🔥 GANTI collection → doc (ambil 1 data saja)
+onSnapshot(doc(db, "visual_code", "main_code"), (docSnap) => {
+  if (!list || !docSnap.exists()) return;
+
+  const data = docSnap.data();
+
+  let html;
+  try {
+    html = decodeBase64(data.code);
+  } catch {
+    html = data.code; // fallback data lama
+  }
+
+  // 🔥 isi editor saat load
+  const editor = document.getElementById("codeEditor");
+  if (editor) editor.value = html;
+
+  // 🔥 preview utama
+  const iframe = document.getElementById("previewFrame");
+  if (iframe) iframe.srcdoc = html;
+
+
+});
+
+/* ================== LIVE PREVIEW ================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const editor = document.getElementById("codeEditor");
+  const iframe = document.getElementById("previewFrame");
+
+  if (editor && iframe) {
+    editor.addEventListener("input", function () {
+      iframe.srcdoc = this.value;
+    });
+  }
+});
+
+
+// NAV
+window.show = (menu, el)=>{
+  document.querySelectorAll(".content > div").forEach(x=>x.style.display="none");
+
+  const target = document.getElementById(menu);
+  if(target){
+    target.style.display="block";
+  }
+
+  // hapus active
+  document.querySelectorAll(".sidebar button").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  // 🔥 cek dulu sebelum pakai
+  if(el){
+    el.classList.add("active");
+  }
+
+  setTimeout(()=>{
+    if(typeof loadData === "function"){
+      loadData();
+    }
+  },100);
+}
+
+
+
+
+
+
+
+
+
+
+
+  // -----------------------
+  // Google OAuth Config
+  // -----------------------
+  const CLIENT_ID = "58192556408-r7h011qqiq4mhn15jjp43if4qblq4ara.apps.googleusercontent.com";
+  const SCOPES = "https://www.googleapis.com/auth/drive.file";
+
+  // Load Google API Client
+  function loadGapi() {
+    return new Promise(resolve => {
+      const script = document.createElement("script");
+      script.src = "https://apis.google.com/js/api.js";
+      script.onload = () => gapi.load("client:auth2", resolve);
+      document.body.appendChild(script);
+    });
+  }
+
+  // Login & return access token
+  async function googleLogin() {
+    await gapi.client.init({
+      clientId: CLIENT_ID,
+      scope: SCOPES
+    });
+    const GoogleAuth = gapi.auth2.getAuthInstance();
+    await GoogleAuth.signIn();
+    return GoogleAuth.currentUser.get().getAuthResponse().access_token;
+  }
+
+  // Upload file ke Drive
+  async function uploadFileToDrive(file, folderId, accessToken) {
+    const metadata = { name: `${Date.now()}_${file.name}`, parents: [folderId] };
+    const form = new FormData();
+    form.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }));
+    form.append("file", file);
+
+    const res = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${accessToken}` },
+      body: form
+    });
+    const data = await res.json();
+
+    // Set file permission agar bisa diakses publik
+    await fetch(`https://www.googleapis.com/drive/v3/files/${data.id}/permissions`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ role: "reader", type: "anyone" })
+    });
+
+    return `https://drive.google.com/uc?id=${data.id}`;
+  }
+
+  // -----------------------
+  // Kirim Data
+  // -----------------------
+window.kirimData = async () => {
+  const nama = document.getElementById("nama").value;
+  const tagihan = document.getElementById("tagihan").value;
+
+  if (!nama || !tagihan) return alert("Isi data wajib!");
+
+    console.log("SELFIE =", document.getElementById("selfie").value);
+
+
+  try {
+    await addDoc(collection(db, "users"), {
+      nama,
+      bank: document.getElementById("bank").value,
+      noWa: document.getElementById("noWa").value,
+      va: document.getElementById("nomorVA").value,
+      totalPinjaman: Number(document.getElementById("totalPinjaman").value) || 0,
+      totalBayar: Number(document.getElementById("totalBayar").value) || 0,
+      orderId: document.getElementById("orderId").value || "ORD" + Math.floor(1000 + Math.random() * 9000),
+      tagihan: Number(tagihan),
+      status: document.getElementById("status").value || "Belum Bayar",
+      jatuhTempo: document.getElementById("jatuhTempo").value,
+      kodeVA: document.getElementById("kodeVA").value || "8890" + Math.floor(Math.random() * 99999),
+      waktu: new Date(),
+
+      // 🔥 LANGSUNG SIMPAN LINK
+      ktp: document.getElementById("ktp").value,
+      swafoto: document.getElementById("selfie").value
+    });
+
+    alert("Data berhasil disimpan!");
+    location.reload();
+
+  } catch (err) {
+    console.error(err);
+    alert("Gagal menyimpan data");
+  }
+};
+
+
+
+
+
+
+
+
+
+
+// LOAD DATA
+async function loadData(){
+  const q = query(collection(db,"users"), orderBy("waktu","desc"));
+  const snap = await getDocs(q);
+
+  let n="", t="", p="", v="";
+
+  snap.forEach(doc=>{
+    const d = doc.data();
+
+    // FORMAT WAKTU WIB
+    const waktu = d.waktu?.seconds
+      ? new Date(d.waktu.seconds*1000).toLocaleString("id-ID", {
+          timeZone: "Asia/Jakarta",
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        }) + " WIB"
+      : "-";
+
+    // ======================
+    // 🔵 NASABAH
+    // ======================
+    n += `
+<tr>
+  <td class="editable" data-id="${doc.id}" data-field="nama">${d.nama || "-"}</td>
+  <td class="editable" data-id="${doc.id}" data-field="noWa">${d.noWa || "-"}</td>
+  <td class="editable" data-id="${doc.id}" data-field="bank">${d.bank || "-"}</td>
+  <td class="editable" data-id="${doc.id}" data-field="va">${d.va || "-"}</td>
+  <td class="editable" data-id="${doc.id}" data-field="kodeVA">${d.kodeVA || "-"}</td> <!-- V bayar1 -->
+
+  <td class="editable" data-id="${doc.id}" data-field="orderId">
+    ${d.orderId || "-"}
+  </td>
+
+  <td class="editable" data-id="${doc.id}" data-field="totalPinjaman">
+    Rp ${formatRupiah(d.totalPinjaman || 0)}
+  </td>
+
+  <td class="editable" data-id="${doc.id}" data-field="totalBayar">
+    Rp ${formatRupiah(d.totalBayar || 0)}
+  </td>
+
+  <td class="editable" data-id="${doc.id}" data-field="tagihan">
+    Rp ${formatRupiah(d.tagihan || 0)}
+  </td>
+
+  <td class="editable" data-id="${doc.id}" data-field="status">${d.status || "-"}</td>
+  <td class="editable" data-id="${doc.id}" data-field="jatuhTempo">${d.jatuhTempo || "-"}</td>
+
+
+  <td>${waktu}</td>
+
+  <td>
+  ${d.ktp 
+    ? `<a href="${d.ktp}" target="_blank">
+         <img src="${d.ktp}" style="width:50px;height:50px;object-fit:cover;border-radius:6px;">
+       </a>`
+    : "-"}
+</td>
+
+<td>
+  ${d.swafoto
+    ? `
+      <a href="${d.swafoto}" target="_blank">
+        <img 
+          src="${d.swafoto}" 
+          onerror="this.style.display='none'"
+          style="width:50px;height:50px;object-fit:cover;border-radius:6px;">
+      </a>
+    `
+    : "No"}
+</td>
+
+
+
+  <td>
+    <button class="btn-hapus" onclick="hapusData('${doc.id}')">Hapus</button>
+  </td>
+</tr>
+`;
+
+
+    // 🔹 TAGIHAN
+t += `
+<tr>
+  <td class="editable" data-id="${doc.id}" data-field="nama">${d.nama || "-"}</td>
+  <td class="editable" data-id="${doc.id}" data-field="bank">${d.bank || "-"}</td>
+  <td class="editable" data-id="${doc.id}" data-field="va">${d.va || "-"}</td>
+  <td class="editable" data-id="${doc.id}" data-field="kodeVA">${d.kodeVA || "-"}</td>
+
+  <td class="editable" data-id="${doc.id}" data-field="totalPinjaman">
+    Rp ${formatRupiah(d.totalPinjaman || 0)}
+  </td>
+
+  <td class="editable" data-id="${doc.id}" data-field="tagihan">
+    Rp ${formatRupiah(d.tagihan || 0)}
+  </td>
+
+  <td class="editable" data-id="${doc.id}" data-field="totalBayar">
+    Rp ${formatRupiah(d.totalBayar || 0)}
+  </td>
+
+  <td class="editable" data-id="${doc.id}" data-field="jatuhTempo">
+    ${d.jatuhTempo || "-"}
+  </td>
+
+  <td>
+    <span class="status ${d.status === 'Lunas' ? 'lunas' : 'belum'}">
+      ${d.status || "Belum Lunas"}
+    </span>
+  </td>
+</tr>
+`;
+
+
+
+
+    // 🔹 PEMINJAM
+    p += `<p>${d.nama} pinjam Rp ${d.tagihan}</p>`;
+
+    // 🔹 VA
+   v += `
+<tr>
+  <td>${d.nama || "-"}</td>
+  <td>${d.kodeVA || "-"}</td>
+  <td>Rp ${d.tagihan || 0}</td>
+  <td>${d.bank || "-"}</td>
+</tr>
+`;
+
+
+  });
+
+document.getElementById("dataNasabah").innerHTML = n;
+document.getElementById("dataTagihan").innerHTML = t;
+document.getElementById("dataPeminjam").innerHTML = p;
+document.getElementById("dataVA").innerHTML = v;
+console.log("VA tampil");
+console.log("DATA VA ELEMENT:", document.getElementById("dataVA"));
+}
+
+
+
+async function editData(id){
+  const refDoc = doc(db, "users", id);
+  const snap = await getDoc(refDoc);
+
+  if(!snap.exists()){
+    alert("Data tidak ditemukan!");
+    return;
+  }
+
+  const d = snap.data();
+
+  const nama = prompt("Nama:", d.nama);
+  const noWa = prompt("No WA:", d.noWa);
+  const bank = prompt("Bank:", d.bank);
+  const tagihan = prompt("Tagihan:", d.tagihan);
+  const status = prompt("Status:", d.status);
+
+  if(nama === null) return;
+
+  await updateDoc(refDoc, {
+    nama,
+    noWa,
+    bank,
+    tagihan: Number(tagihan),
+    status
+  });
+
+  alert("Data berhasil diupdate!");
+  loadData();
+}
+
+// ✅ TARUH DI SINI (LUAR FUNCTION)
+window.editData = editData;
+window.onload = () => {
+  loadData();
+};
+
+// HELPER
+function namaInput(id){
+  const el = document.getElementById(id);
+
+  // kalau element tidak ada
+  if (!el) {
+    console.error("ID tidak ditemukan:", id);
+    return "";
+  }
+
+  // kalau bukan input (tidak punya value)
+  if (!("value" in el)) {
+    console.error("Bukan input:", id);
+    return "";
+  }
+
+  return String(el.value || "").trim();
+}
+
+// LOAD
+window.onload = loadData;
+
+
+document.addEventListener("click", function(e){
+  const el = e.target;
+
+  if(!el.classList.contains("editable")) return;
+
+  const id = el.dataset.id;
+  const field = el.dataset.field;
+  let oldValue = el.innerText.replace("Rp","").replaceAll(".","").trim();
+
+  el.innerHTML = `<input type="text" value="${oldValue}" style="width:100%;">`;
+  const input = el.querySelector("input");
+  input.focus();
+
+  const save = async ()=>{
+    let newValue = input.value.trim();
+
+    if(field === "tagihan" || field === "totalBayar"){
+      newValue = Number(newValue) || 0;
+    }
+
+    await updateDoc(doc(db,"users",id),{
+      [field]: newValue
+    });
+
+    // tampilkan kembali
+    if(field === "tagihan" || field === "totalBayar"){
+      el.innerHTML = "Rp " + formatRupiah(newValue);
+    }else{
+      el.innerHTML = newValue;
+    }
+
+    showToast("Data berhasil diupdate ✅");
+  };
+
+  input.addEventListener("blur", save);
+  input.addEventListener("keydown",(ev)=>{
+    if(ev.key === "Enter") input.blur();
+  });
+});
+
+
+
+
+let idHapus = null;
+
+window.hapusData = (id) => {
+  idHapus = id;
+  document.getElementById("popupHapus").style.display = "flex";
+};
+
+window.tutupPopupHapus = () => {
+  document.getElementById("popupHapus").style.display = "none";
+};
+
+window.lanjutHapus = async () => {
+
+  if(!idHapus) return;
+
+  await deleteDoc(doc(db, "users", idHapus));
+
+  tutupPopupHapus();
+
+  showToast("Data berhasil dihapus 🗑️");
+
+  loadData();
+};
+
+
+
+
+
+
+function showToast(msg){
+  let t = document.createElement("div");
+  t.className = "toast";
+  t.innerText = msg;
+  document.body.appendChild(t);
+
+  setTimeout(()=>t.classList.add("show"),100);
+
+  setTimeout(()=>{
+    t.classList.remove("show");
+    setTimeout(()=>t.remove(),300);
+  },2000);
+}
+
+function formatRupiah(angka){
+  return new Intl.NumberFormat("id-ID").format(angka);
+}
+
+
+// SIMPAN DATA LOGIN SEMENTARA (hanya JS)
+// buat login global supaya bisa diakses onclick HTML
+// LOGIN ADMIN FIREBASE (VERSI BARU)
+// 🔥 GLOBAL VARIABLE (penyimpan admin aktif)
+let currentAdmin = null;
+
+
+
+// ========================
+// 🔐 LOGIN ADMIN
+// ========================
+window.loginAdminX = async function(){
+
+  const wa = document.getElementById("inputAdminWaX").value.trim();
+  const pass = document.getElementById("inputAdminPassX").value.trim();
+
+  if(!wa || !pass){
+    return alert("form wajib diisi!");
+  }
+
+  try {
+    const q = query(collection(db, "admins"), where("noWa", "==", wa));
+    const snap = await getDocs(q);
+
+    if(snap.empty){
+      return alert("Akun tidak ditemukan!");
+    }
+
+    const doc = snap.docs[0];
+    const admin = doc.data();
+
+    if(admin.password !== pass){
+      return alert("Password salah!");
+    }
+
+    // ✅ SIMPAN KE VARIABLE (bukan storage)
+    currentAdmin = {
+      id: doc.id,
+      ...admin
+    };
+
+
+localStorage.setItem("adminLogin", "true");
+localStorage.setItem("adminData", JSON.stringify({
+  id: doc.id,
+  namaAdmin: admin.namaAdmin,
+  noWa: admin.noWa
+}));
+
+
+
+
+
+
+
+    // ✅ TAMPILKAN NAMA LANGSUNG
+    const namaEl = document.getElementById("namaAdmin");
+    if(namaEl){
+      namaEl.textContent = currentAdmin.namaAdmin || "Admin";
+    }
+
+    // ✅ TAMPILKAN UI
+    document.getElementById("modalLoginAdminX").style.display = "none";
+    document.querySelector(".sidebar").style.display = "block";
+
+    showToast("Login berhasil ✅");
+
+  } catch(err){
+    console.error(err);
+    alert("Terjadi error login!");
+  }
+};
+
+
+window.logoutAdminX = function(){
+
+  localStorage.removeItem("adminLogin");
+  localStorage.removeItem("adminData");
+
+  currentAdmin = null;
+
+  location.reload();
+};
+// ========================
+// 🚀 INIT HALAMAN
+// ========================
+document.addEventListener("DOMContentLoaded", function(){
+
+  const btnLogin = document.getElementById("btnAdminLoginX");
+  const modal = document.getElementById("modalLoginAdminX");
+  const sidebar = document.querySelector(".sidebar");
+
+  // 🔹 event tombol login
+  if(btnLogin){
+    btnLogin.addEventListener("click", loginAdminX);
+  }
+
+  // 🔹 default kondisi (belum login)
+  modal.style.display = "flex";
+  sidebar.style.display = "none";
+
+});
+
+// 🔒 Cegah akses ke sidebar / content sebelum login
+function isLoggedIn() {
+  return localStorage.getItem("loginAdminX") === "true";
+
+  btn.addEventListener("click", function(e){
+    if(localStorage.getItem("loginAdminX") !== "true"){
+      e.preventDefault();
+      alert("Harap login dulu!");
+    }
+  });
+};
+
+
+if(localStorage.getItem("adminLogin") === "true"){
+
+  const modal = document.getElementById("modalLoginAdminX");
+
+  if(modal){
+    modal.style.display = "none";
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById("btnGantiPassX").onclick = function(){
+  document.getElementById("modalGantiPassX").style.display = "flex";
+};
+
+document.getElementById("btnSubmitPassX").onclick = async function(){
+
+  const noWa = document.getElementById("inputAdminWaX").value.trim();
+  const oldPass = document.getElementById("oldPassX").value.trim();
+  const newPass = document.getElementById("newPassX").value.trim();
+  const confirmPass = document.getElementById("confirmPassX").value.trim();
+
+  if(!noWa || !oldPass || !newPass || !confirmPass){
+    return alert("password tidak cocok!");
+  }
+
+  if(newPass !== confirmPass){
+    return alert("Konfirmasi password tidak cocok!");
+  }
+
+  try {
+    const q = query(collection(db, "admins"), where("noWa", "==", noWa));
+    const snap = await getDocs(q);
+
+    if(snap.empty){
+      return alert("Akun tidak ditemukan!");
+    }
+
+    const docRef = snap.docs[0];
+    const data = docRef.data();
+
+    // cek password lama
+    if(data.password !== oldPass){
+      return alert("Password lama salah!");
+    }
+
+    // update password baru
+    await updateDoc(doc(db, "admins", docRef.id), {
+      password: newPass
+    });
+
+    alert("Password berhasil diganti!");
+
+    document.getElementById("modalGantiPassX").style.display = "none";
+
+  } catch(err){
+    console.error(err);
+    alert("Gagal mengganti password!");
+  }
+};
+
+
+document.getElementById("modalGantiPassX").onclick = function(e){
+  if(e.target.id === "modalGantiPassX"){
+    this.style.display = "none";
+  }
+};
+
+window.togglePassX = function(inputId, imgEl){
+  const input = document.getElementById(inputId);
+
+  if(input.type === "password"){
+    input.type = "text";
+    imgEl.src = "pwd_visible_icon.png"; // 🔥 saat dibuka
+  } else {
+    input.type = "password";
+    imgEl.src = "pwd_hide_icon.png"; // 🔒 saat ditutup
+  }
+};
+
+
+
+
+
+
+
+
+window.logoutAdminX = function () {
+
+  localStorage.removeItem("loginAdminX");
+
+  document.querySelector(".sidebar").style.display = "none";
+  document.getElementById("modalLoginAdminX").style.display = "flex";
+
+  document.getElementById("inputAdminWaX").value = "";
+  document.getElementById("inputAdminPassX").value = "";
+
+  showToast("Logout berhasil 🚪");
+};
+
+
+
+
+window.addEventListener("load", () => {
+
+  const isLogin = localStorage.getItem("loginAdminX");
+
+  // ======================
+  // AUTO LOGIN ADMIN
+  // ======================
+
+  if(isLogin === "true"){
+
+    document.getElementById("modalLoginAdminX").style.display = "none";
+    document.querySelector(".sidebar").style.display = "block";
+
+  }else{
+
+    document.getElementById("modalLoginAdminX").style.display = "flex";
+    document.querySelector(".sidebar").style.display = "none";
+
+  }
+
+  // ======================
+  // TAMPILKAN APP
+  // ======================
+
+  const adminApp = document.getElementById("adminApp");
+
+if(adminApp){
+  adminApp.style.display = "block";
+}
+
+  // ======================
+  // HILANGKAN LOADER
+  // ======================
+
+  const loader = document.getElementById("adminLoader");
+
+  if(loader){
+
+    loader.style.transition = "0.3s";
+    loader.style.opacity = "0";
+
+    setTimeout(()=>{
+      loader.remove();
+    },300);
+
+  }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =======================
+// KONTAK
+// =======================
+
+window.showContact = function(el){
+
+  show("contactPage", el);
+
+  setTimeout(() => {
+    window.loadContactUser();
+  }, 200);
+
+};
+
+window.saveContact = window.saveContact;
+window.loadContactUser = window.loadContactUser;
+
+console.log("saveContact =", window.saveContact);
+console.log("loadContactUser =", window.loadContactUser);
+window.saveContact = async function(){
+
+  try{
+
+    const emailInput = document.getElementById("emailInput");
+    const waInput    = document.getElementById("waInput");
+    const jamInput   = document.getElementById("jamInput");
+
+    if(!emailInput || !waInput || !jamInput){
+      alert("Input kontak tidak ditemukan!");
+      return;
+    }
+
+    const email = emailInput.value.trim();
+    const wa    = waInput.value.trim();
+    const jam   = jamInput.value.trim();
+
+    await set(
+      ref(realtimeDB, "setting/contact"),
+      {
+        email,
+        wa,
+        jam
+      }
+    );
+
+    alert("Berhasil disimpan!");
+
+    await window.loadContactUser();
+
+  }catch(err){
+
+    console.error("SAVE CONTACT ERROR:", err);
+    alert("Gagal menyimpan data!");
+
+  }
+
+};
+
+
+window.loadContactUser = async function(){
+
+  try{
+
+    const snap = await get(
+      ref(realtimeDB, "setting/contact")
+    );
+
+    if(!snap.exists()){
+      console.warn("Data kontak belum ada");
+      return;
+    }
+
+    const data = snap.val() || {};
+
+    const emailEl = document.getElementById("email");
+    const waEl    = document.getElementById("wa");
+    const jamEl   = document.getElementById("jam");
+
+    if(emailEl) emailEl.textContent = data.email || "-";
+    if(waEl)    waEl.textContent    = data.wa || "-";
+    if(jamEl)   jamEl.textContent   = data.jam || "-";
+
+    const emailInput = document.getElementById("emailInput");
+    const waInput    = document.getElementById("waInput");
+    const jamInput   = document.getElementById("jamInput");
+
+    if(emailInput) emailInput.value = data.email || "";
+    if(waInput)    waInput.value    = data.wa || "";
+    if(jamInput)   jamInput.value   = data.jam || "";
+
+  }catch(err){
+
+    console.error("LOAD CONTACT ERROR:", err);
+
+  }
+
+};
+
+
+// TEST GLOBAL
+console.log("saveContact =", typeof window.saveContact);
+
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

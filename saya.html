@@ -4,41 +4,53 @@
 <head>
 <meta charset="UTF-8">
 
+
 <!-- VIEWPORT -->
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <!-- SEO -->
-<meta name="description" content="Layanan pengecekan tagihan dan pembayaran pinjaman secara online.">
+<title>DANA PLATFORM - Layanan Digital</title>
+<meta name="description" content="DANA PLATFORM - Layanan pengecekan informasi dan layanan pengguna secara online.">
 <meta name="robots" content="index, follow">
 
-<!-- OPEN GRAPH (WhatsApp / Facebook) -->
-<meta property="og:title" content="Pinjamanku - Cek Tagihan Online">
-<meta property="og:description" content="Layanan pengecekan tagihan dan pembayaran pinjaman secara online.">
-<meta property="og:image" content="https://rupiahsegar.sbs/rupiahsegar-view.jpg">
-<meta property="og:url" content="https://rupiahsegar.sbs">
+<!-- OPEN GRAPH -->
+<meta property="og:title" content="DANA PLATFORM">
+<meta property="og:description" content="Layanan digital DANA PLATFORM.">
+<meta property="og:image" content="https://danaplatform.github.io/danaplatform/logo8view.jpeg">
+<meta property="og:url" content="https://danaplatform.github.io/danaplatform/index.html">
 <meta property="og:type" content="website">
 
-<!-- TWITTER CARD (bonus bagus untuk share) -->
+<!-- TWITTER -->
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DANA PLATFORM">
+<meta name="twitter:description" content="Layanan digital DANA PLATFORM.">
+<meta name="twitter:image" content="https://danaplatform.github.io/danaplatform/logo8view.jpeg">
 
-<!-- FAVICON (ICON TAB BROWSER) -->
-<link rel="icon" type="image/png" href="https://rupiahsegar.sbs/rupiahsegar-view.jpg">
-<link rel="shortcut icon" type="image/png" href="https://rupiahsegar.sbs/rupiahsegar-view.jpg">
-<link rel="apple-touch-icon" href="https://rupiahsegar.sbs/rupiahsegar-view.jpg">
-<link rel="icon" href="/favicon.ico">
+<!-- FAVICON / ICON TAB -->
+<link rel="icon" type="image/jpeg" href="./logo8view.jpeg?v=2">
+<link rel="shortcut icon" type="image/jpeg" href="./logo8view.jpeg?v=2">
+<link rel="apple-touch-icon" href="./logo8view.jpeg?v=2">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
 <!-- THEME -->
 <meta name="theme-color" content="#b10808">
-
-<!-- STRUCTURED DATA (GOOGLE LOGO) -->
+<!-- STRUCTURED DATA -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Pinjamanku",
-  "url": "https://rupiahsegar.sbs",
-  "logo": "https://rupiahsegar.sbs/rupiahsegar-view.jpg"
+  "name": "DANA PLATFORM",
+  "url": "https://danaplatform.github.io/danaplatform/",
+  "logo": "https://danaplatform.github.io/danaplatform/logo8view.jpeg"
 }
 </script>
+
 
 <title>Pinjamanku - Saya</title>
 
@@ -71,7 +83,10 @@ body{
 
 
 
-
+.info-nasabah-card,
+.info-nasabah-card * {
+  font-family: 'Poppins', sans-serif;
+}
 
 
 
@@ -153,9 +168,9 @@ html, body {
 .logo-desc{
   font-size: 11px;
 
-  color: #ffd6d6;
+  color: #ffffff;
 
-  font-weight: 500;
+  font-weight: 400;
 
   margin-top: 2px;
 
@@ -165,12 +180,13 @@ html, body {
 }
 
 
+
 .header {
   display: flex;
   justify-content: space-between; /* kiri di kiri, kanan di kanan */
   align-items: center;
     padding: 13px 5px;
-  background: #b10808;
+  background:#b10808;
   position: fixed;
   border-radius: 1px 1px 14px 11px;
   color: #fff;
@@ -185,7 +201,7 @@ html, body {
 .header-left {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 9px;
   margin-left: 6px; /* tambahan biar tidak terlalu nempel kiri */
 }
 
@@ -267,7 +283,7 @@ html, body {
   width: 50vw;
   height: 20vh;
 
-  background: #b10808;
+  background: #767676;
   color: #ffffff;
 
   flex-direction: column;
@@ -326,7 +342,7 @@ html, body {
   margin-top: auto;
   padding: 14px;
   text-align: center;
-  background: #f48639;
+  background: #b10808;
   border-radius: 8px;
 }
 
@@ -451,8 +467,7 @@ html, body {
 .card {
   background: white;
   border-radius: 12px;
-  padding: 18px;
-  margin: 50px 15px 15px 15px; /* atas 50px, kanan/bawah/kiri 15px */
+  padding: 10px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   border: 1px solid #b4b4b4;
 }
@@ -462,7 +477,7 @@ html, body {
   font-weight:bold;
   font-size:18px;
   margin-bottom:15px;
-  color:#c40000;
+  color:#ff0000;
 }
 
 .row{
@@ -504,7 +519,7 @@ html, body {
 }
 
 .payment-box {
-  background: #f5f5f5;
+  background: #e8e8e8;
   border: 2px dashed #ddd;
   border-radius: 10px;
   padding: 15px;
@@ -803,7 +818,7 @@ html, body {
 
 /* PAYMENT BOX */
 .payment-box{
-  background:#edfff2;
+  background:#e8e8e8;
   border-radius:12px;
   padding:15px;
   margin-top:15px;
@@ -1121,7 +1136,7 @@ html, body {
 }
 
 .nav-item:hover{
-  color:#c40000;
+  color:#87bad7;
 }
 
 
@@ -1922,6 +1937,8 @@ img, .logo-admin, .icon {
 .bottom-nav .nav-item img {
   object-fit: contain;
   transition: transform .2s ease;
+  background: #c7c2ff;
+  border-radius: 10px;
 }
 
 
@@ -1933,6 +1950,417 @@ body.page-saya #sayaPage { display: block !important; }
 body.page-saya .bottom-nav .nav-item:nth-child(3) { color: #b10808; }
 body.page-saya .bottom-nav .nav-item:nth-child(3) img { transform: translateY(-2px); }
 
+
+
+
+
+
+
+/* BANK NASABAH - PREMIUM BANKING STYLE */
+
+#bankNasabah {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  width: auto;
+  max-width: 75%;
+}
+
+.bank-item-saya {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 11px;
+
+  padding: 9px 0;
+  min-height: 46px;
+
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #edf0f5;
+  border-radius: 0;
+  box-shadow: none;
+
+  color: #202b3c;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.bank-item-saya:last-child {
+  border-bottom: none;
+}
+
+.bank-item-saya img {
+  display: block;
+  width: 38px;
+  height: 30px;
+  border-radius: 10px;
+
+  object-fit: contain;
+  object-position: center;
+
+  padding: 2px;
+  flex-shrink: 0;
+
+  background: transparent;
+  border: none;
+
+}
+
+.bank-item-saya span {
+  white-space: nowrap;
+  line-height: 1.4;
+  color: #263449;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  #bankNasabah {
+    max-width: 78%;
+  }
+
+  .bank-item-saya {
+    gap: 9px;
+    min-height: 43px;
+    padding: 7px 0;
+    font-size: 12px;
+  }
+
+  .bank-item-saya img {
+    width: 35px;
+    height: 28px;
+  }
+}
+
+
+/* =================================
+   INFORMASI NASABAH PROFESIONAL
+================================= */
+
+.info-nasabah-card {
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #edf0f5;
+  border-radius: 16px;
+  padding: 5px 15px;
+  box-shadow: 0 3px 12px rgba(25, 42, 70, 0.045);
+}
+
+.info-nasabah-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+  min-height: 62px;
+  box-sizing: border-box;
+}
+
+.info-nasabah-left {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  flex: 1;
+}
+
+.info-nasabah-icon {
+  width: 43px;
+  height: 43px;
+  min-width: 43px;
+  border-radius: 12px;
+  background: #f1f4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-nasabah-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.info-nasabah-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.info-nasabah-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #303747;
+}
+
+.info-nasabah-subtitle {
+  font-size: 11px;
+  color: #9aa2b1;
+  font-weight: 400;
+}
+
+/* NILAI INFORMASI */
+.info-nasabah-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #525e70;
+  text-align: right;
+  max-width: 55%;
+  min-width: 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+/* PEMISAH */
+.info-nasabah-divider {
+  height: 1px;
+  background: #f0f2f6;
+  margin-left: 54px;
+}
+
+/* KHUSUS BANK BANYAK */
+#bankNasabah {
+  display: block;
+  max-width: 55%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.9;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .info-nasabah-card {
+    border-radius: 14px;
+    padding: 4px 12px;
+  }
+
+  .info-nasabah-row {
+    padding: 14px 0;
+    gap: 8px;
+  }
+
+  .info-nasabah-icon {
+    width: 39px;
+    height: 39px;
+    min-width: 39px;
+  }
+
+  .info-nasabah-value {
+    font-size: 11px;
+    max-width: 55%;
+  }
+
+  #bankNasabah {
+    max-width: 55%;
+  }
+}
+
+
+/* POSISI BANK PEMBAYARAN TETAP DI ATAS */
+.info-nasabah-row:has(#bankNasabah) {
+  align-items: flex-start;
+}
+
+.info-nasabah-row:has(#bankNasabah) .info-nasabah-left {
+  align-items: flex-start;
+}
+
+.info-nasabah-row:has(#bankNasabah) .info-nasabah-text {
+  padding-top: 2px;
+}
+
+#bankNasabah {
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+/* =================================
+   DAFTAR BANK NASABAH
+================================= */
+
+/* =================================
+   DAFTAR BANK NASABAH
+================================= */
+
+.bank-list-saya,
+.bank-list-tambahan {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bank-list-tambahan {
+  margin-top: 12px;
+}
+
+.bank-item-saya {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 12px 14px;
+  background: #ffffff;
+  border: 1px solid #e8edf3;
+  border-radius: 12px;
+  box-shadow: 0 2px 7px rgba(15, 23, 42, 0.035);
+  transition: all 0.2s ease;
+}
+
+.bank-item-saya:hover {
+  background: #f8fbff;
+  border-color: #cbdcf0;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  transform: translateY(-1px);
+}
+
+.bank-item-saya img {
+  width: 36px;
+  height: 36px;
+  padding: 5px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: #f6f8fb;
+  border: 1px solid #edf0f4;
+  border-radius: 9px;
+}
+
+.bank-item-saya span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.5;
+  letter-spacing: 0.1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bank-lihat-lainnya {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 13px;
+  padding: 7px 0;
+  border: none;
+  background: transparent;
+  color: #2878d4;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.bank-lihat-lainnya:hover {
+  color: #1559a8;
+}
+
+.bank-lihat-lainnya:active {
+  opacity: 0.6;
+  transform: scale(0.98);
+}
+
+@media (max-width: 480px) {
+  .bank-list-saya,
+  .bank-list-tambahan {
+    gap: 9px;
+  }
+
+  .bank-item-saya {
+    padding: 11px 12px;
+    gap: 10px;
+    border-radius: 11px;
+  }
+
+  .bank-item-saya img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .bank-item-saya span {
+    font-size: 11px;
+  }
+}
+
+
+
+
+
+
+
+
+
+#totalBayar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  min-width: 0;
+  padding: 13px 15px;
+
+  font-family: 'Poppins', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #c62828;
+  letter-spacing: -0.5px;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+
+  background: linear-gradient(145deg, #ffffff, #fff8f8);
+  border: 1px solid #f0dddd;
+  border-left: 4px solid #c62828;
+  border-radius: 12px;
+
+  box-shadow: 0 3px 12px rgba(120, 30, 30, 0.055);
+  box-sizing: border-box;
+}
+
+#totalBayar .order {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding-top: 9px;
+  border-top: 1px dashed #e8cccc;
+}
+
+#totalBayar .order-text {
+  min-width: 0;
+  overflow: hidden;
+  color: #7b6870;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#totalBayar .copy-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  object-fit: contain;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.2s ease;
+}
+
+#totalBayar .copy-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+#totalBayar .copy-icon:active {
+  transform: scale(0.9);
+}
 </style>
 </head>
 <body class="page-saya">
@@ -2163,7 +2591,7 @@ style="width:18px; vertical-align:middle; filter: brightness(0) invert(1);">
   </div>
   <div class="ktp-box">
     <div class="ktp-content">
-      <img id="selfieImg" class="ktp-img" src="abk.png" alt="Foto Selfie">
+      <img id="selfieImg" class="ktp-img" src="https://res.cloudinary.com/djxlbemky/image/upload/v1791907851/uly0qmc8iykbd8cuzvux.webp" alt="Foto Selfie">
       <p>Verifikasi Wajah</p>
     </div>
   </div>
@@ -2191,20 +2619,43 @@ style="width:18px; vertical-align:middle; filter: brightness(0) invert(1);">
     </span>
   </div>
 </div>
-      <div class="row">
-        <span class="label"><img src="bdn.png" class="icon"> Nama</span>
-        <span class="value" id="namaNasabah" style="color:#7c7c7c;">-</span>
+<div class="info-nasabah-card">
+
+  <!-- NAMA NASABAH -->
+  <div class="info-nasabah-row">
+    <div class="info-nasabah-left">
+      <div class="info-nasabah-icon">
+        <img src="bdn.png" alt="Nama">
       </div>
-      <div class="row">
-        <span class="label"><img src="bac.png" class="icon"> Nama Bank</span>
-        <span class="value" id="bankNasabah">-</span>
-      </div>
-      <div class="row">
-        <span class="label"><img src="aaq.png" class="icon"> Virtual Account</span>
-        <span class="value" id="vaNasabah">-</span>
+
+      <div class="info-nasabah-text">
+        <span class="info-nasabah-title">Nama Nasabah</span>
+        <span class="info-nasabah-subtitle">Nama pemilik akun</span>
       </div>
     </div>
+
+    <span class="info-nasabah-value" id="namaNasabah">-</span>
   </div>
+
+  <div class="info-nasabah-divider"></div>
+
+  <!-- BANK PEMBAYARAN -->
+  <div class="info-nasabah-row">
+    <div class="info-nasabah-left">
+      <div class="info-nasabah-icon">
+        <img src="bac.png" alt="Bank">
+      </div>
+
+      <div class="info-nasabah-text">
+        <span class="info-nasabah-title">Bank Pembayaran</span>
+        <span class="info-nasabah-subtitle">Rekening pembayaran terdaftar</span>
+      </div>
+    </div>
+
+    <span class="info-nasabah-value" id="bankNasabah">-</span>
+  </div>
+
+</div>
 
   
 
@@ -2232,23 +2683,18 @@ style="width:18px; vertical-align:middle; filter: brightness(0) invert(1);">
       width:42px;
       height:42px;
       min-width:42px;
-
       border-radius:12px;
-
       background:#ffffff;
-
       display:flex;
       align-items:center;
       justify-content:center;
-
       box-shadow:0 4px 10px rgba(0,0,0,0.08);
-
       border:1px solid #e5e7eb;
     ">
 
-      <img 
-        src="bdn.png" 
-        alt="Security"
+      <img
+        src="bdn.png"
+        alt="Informasi Pembayaran"
         style="
           width:24px;
           height:24px;
@@ -2267,7 +2713,7 @@ style="width:18px; vertical-align:middle; filter: brightness(0) invert(1);">
         color:#111827;
         margin-bottom:8px;
       ">
-        Keamanan & Perlindungan Data
+        Panduan Pembayaran Tagihan
       </div>
 
       <p style="
@@ -2277,8 +2723,23 @@ style="width:18px; vertical-align:middle; filter: brightness(0) invert(1);">
         line-height:1.8;
         text-align:left;
       ">
-        Seluruh data pengguna diproses secara aman dan hanya digunakan
-        untuk kebutuhan verifikasi layanan sesuai kebijakan privasi yang berlaku.
+        Untuk melakukan pembayaran, buka menu <b>Tagihan</b>, kemudian
+        klik tombol <b>Bayar Sekarang</b>. Pilih bank pembayaran yang
+        tersedia. Sistem akan menampilkan nomor <b>Virtual Account (VA)</b>
+        sesuai dengan bank yang Anda pilih.
+
+        <br><br>
+
+        Klik tombol <b>Salin</b> untuk menyalin nomor Virtual Account.
+        Selanjutnya, lakukan pembayaran melalui ATM, layanan mobile banking,
+        atau kanal pembayaran bank terkait dengan memasukkan nomor VA
+        tersebut.
+
+        <br><br>
+
+        Pastikan bank yang digunakan sesuai dengan pilihan Anda dan
+        nominal pembayaran sama persis dengan jumlah tagihan yang
+        tertera di sistem agar transaksi dapat diproses dengan benar.
       </p>
 
     </div>
@@ -2286,7 +2747,6 @@ style="width:18px; vertical-align:middle; filter: brightness(0) invert(1);">
   </div>
 
 </div>
-
 
   <!-- POPUP BAYAR -->
 <!-- POPUP PEMBAYARAN -->
@@ -2415,7 +2875,71 @@ onValue(ref(realtimeDB, "setting/header"), (snap) => {
 });
 
 
+window.aturFotoNasabah = function(userData) {
+    const FOTO_DEFAULT_USER = "https://placehold.co/600x400/e9edf5/64748b?text=Foto+Tidak+Tersedia";
 
+    if (!userData) return;
+
+    const ktpImg = document.getElementById("ktpImg");
+    const selfieImg = document.getElementById("selfieImg");
+    const viewer = document.getElementById("imageViewer");
+    const viewerImg = document.getElementById("viewerImg");
+    const closeBtn = document.querySelector(".close-viewer");
+
+    function pasangFoto(img, url) {
+        if (!img) return;
+
+        img.onerror = function() {
+            this.onerror = null;
+            this.src = FOTO_DEFAULT_USER;
+        };
+
+        img.src = (typeof url === "string" && url.trim())
+            ? url.trim()
+            : FOTO_DEFAULT_USER;
+    }
+
+    pasangFoto(ktpImg, userData.ktp);
+    pasangFoto(selfieImg, userData.swafoto);
+
+    function showImage(src) {
+        if (!viewer || !viewerImg) return;
+
+        viewerImg.onerror = function() {
+            this.onerror = null;
+            this.src = FOTO_DEFAULT_USER;
+        };
+
+        viewerImg.src = src || FOTO_DEFAULT_USER;
+        viewer.style.display = "flex";
+    }
+
+    if (ktpImg) {
+        ktpImg.onclick = function() {
+            showImage(this.src);
+        };
+    }
+
+    if (selfieImg) {
+        selfieImg.onclick = function() {
+            showImage(this.src);
+        };
+    }
+
+    if (closeBtn) {
+        closeBtn.onclick = function() {
+            if (viewer) viewer.style.display = "none";
+        };
+    }
+
+    if (viewer) {
+        viewer.onclick = function(e) {
+            if (e.target === viewer) {
+                viewer.style.display = "none";
+            }
+        };
+    }
+};
 
 
 window.addEventListener("load", () => {
@@ -2455,32 +2979,166 @@ window.addEventListener("load", () => {
 
 
 
-/* BASE64 */
-function decodeBase64(str) {
-  return decodeURIComponent(escape(atob(str)));
-}
+/* =====================================
+   PEMUATAN IKLAN DARI FIREBASE ADMIN
+===================================== */
+
 let sponsorHTML = "";
+window.sponsorUserLoggedIn = false;
+
+function decodeBase64(str) {
+  try {
+    return decodeURIComponent(escape(atob(str)));
+  } catch (e) {
+    return str;
+  }
+}
+
+window.tampilkanSponsorAdmin = function() {
+ console.log("STATUS IKLAN:", {
+  htmlTersedia: !!sponsorHTML,
+  panjangHTML: sponsorHTML.length,
+  userLogin: sponsorUserLoggedIn
+});
+
+
+// MENUTUP SELURUH PEMBUNGKUS IKLAN SPONSOR
+window.addEventListener("message", function(event) {
+
+    if (event.data === "sponsor-ad-close") {
+
+        const wrap = document.getElementById("sponsorAdFrameWrap");
+
+        if (wrap) {
+            wrap.remove();
+        }
+
+    }
+
+});
+
+
+if (!sponsorHTML || !window.sponsorUserLoggedIn) return;
+  document.getElementById("sponsorAdFrameWrap")?.remove();
+
+  const wrap = document.createElement("div");
+  wrap.id = "sponsorAdFrameWrap";
+
+wrap.style.cssText = `
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.35);
+`;
+
+
+  const frame = document.createElement("iframe");
+  frame.title = "Iklan Sponsor";
+
+frame.style.cssText = `
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  max-height: 650px;
+  border: 0;
+  display: block;
+  background: transparent;
+`;
+  frame.setAttribute(
+    "sandbox",
+    "allow-scripts allow-forms allow-popups"
+  );
+
+  const helperScript = `
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const popup = document.getElementById("sponsorPopup");
+
+        if (popup) {
+          popup.classList.add("active");
+        }
+
+        document.addEventListener("click", function(e) {
+          const tombolTutup = e.target.closest(
+            "#sponsorPopup .popup-header button, #closePopupBtn"
+          );
+
+          if (tombolTutup) {
+            window.parent.postMessage("sponsor-ad-close", "*");
+          }
+        });
+      });
+    <\/script>
+  `;
+
+ 
+  const frameHTML = sponsorHTML + `
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const popup = document.getElementById("sponsorPopup");
+        if (popup) popup.classList.add("active");
+
+        document.addEventListener("click", function(e) {
+          const tombol = e.target.closest(
+            "#sponsorPopup .popup-header button, #closePopupBtn"
+          );
+
+          if (tombol) {
+            window.parent.postMessage("sponsor-ad-close", "*");
+          }
+        });
+      });
+    <\/script>
+  `;
+
+  frame.srcdoc = frameHTML;
+
+  wrap.appendChild(frame);
+  // Klik area luar iklan untuk menutup
+wrap.addEventListener("click", function(e) {
+  if (e.target === wrap) {
+    wrap.remove();
+  }
+});
+
+// Tampilkan iklan
+document.body.appendChild(wrap);
+
+  console.log("Iklan Admin berhasil ditampilkan");
+}
+
+window.addEventListener("message", function(e) {
+  if (e.data === "sponsor-ad-close") {
+    document.getElementById("sponsorAdFrameWrap")?.remove();
+  }
+});
 
 onSnapshot(doc(db, "visual_code", "main_code"), (docSnap) => {
-  if (!docSnap.exists()) return;
+  if (!docSnap.exists()) {
+    sponsorHTML = "";
+    return;
+  }
 
-  let html = docSnap.data().code;
+  const code = docSnap.data().code || "";
+  sponsorHTML = decodeBase64(code);
 
-  try {
-    html = decodeURIComponent(escape(atob(html)));
-  } catch {}
+  console.log("Iklan Admin berhasil dimuat");
 
-  html = html
-    .replace(/<!DOCTYPE.*?>/gi, "")
-    .replace(/<html.*?>/gi, "")
-    .replace(/<\/html>/gi, "")
-    .replace(/<head.*?>[\s\S]*?<\/head>/gi, "")
-    .replace(/<body.*?>/gi, "")
-    .replace(/<\/body>/gi, "");
-
-  sponsorHTML = html; // ✅ HANYA SIMPAN
-  console.log("📦 Sponsor siap ditampilkan");
+  if (sponsorUserLoggedIn) {
+    tampilkanSponsorAdmin();
+  }
 });
+
+
+
+
+
+
 
 let userData = null; // simpan data user yang login
 
@@ -2642,54 +3300,12 @@ document.getElementById("jatuhTempoPinjaman").innerText =
     document.getElementById("namaNasabah").innerText = userData.nama || "-";
     document.getElementById("orderId").innerText = "Order ID : " + (userData.orderId || "-");
     document.getElementById("totalBayar").childNodes[0].textContent = "Rp " + ((userData.totalBayar || 0).toLocaleString());
-    document.getElementById("bankNasabah").innerText = userData.bank || "-";
-    document.getElementById("vaNasabah").innerText = userData.va || "-";
+    tampilkanBankSaya(userData);
 
     // Foto KTP & Selfie
    // Foto KTP & Selfie (versi aman)
-const ktpImg = document.getElementById("ktpImg");
-const selfieImg = document.getElementById("selfieImg");
-
-const viewer = document.getElementById("imageViewer");
-const viewerImg = document.getElementById("viewerImg");
-const closeBtn = document.querySelector(".close-viewer");
-
-// 🔥 fungsi buka viewer
-function showImage(src){
-  viewer.style.display = "flex";
-  viewerImg.src = src;
-}
-
-// 🔹 klik KTP
-if(ktpImg){
-  ktpImg.addEventListener("click", () => {
-    showImage(ktpImg.src);
-  });
-}
-
-// 🔹 klik selfie
-if(selfieImg){
-  selfieImg.addEventListener("click", () => {
-    showImage(selfieImg.src);
-  });
-}
-
-// 🔥 tombol close
-closeBtn.addEventListener("click", () => {
-  viewer.style.display = "none";
-});
-
-// 🔥 klik luar gambar = close
-viewer.addEventListener("click", (e) => {
-  if(e.target === viewer){
-    viewer.style.display = "none";
-  }
-});
-
-if (userData && ktpImg && selfieImg) {
-  ktpImg.src = userData.ktp || "";
-  selfieImg.src = userData.swafoto || "";
-}
+// FOTO KTP & SELFIE
+window.aturFotoNasabah(userData);
 
 console.log("DATA USER:", userData);
 
@@ -2707,75 +3323,24 @@ if(vaContainer){
 }
 
 // 🔥 tampilkan sponsor setelah login
+
+
+
+
+
+
+
+
+// =====================================
+// TAMPILKAN IKLAN ADMIN SETELAH LOGIN
+// =====================================
+
+// Tampilkan iklan Admin setelah user berhasil login
+sponsorUserLoggedIn = true;
+
 setTimeout(() => {
-
-  if (!sponsorHTML) {
-    console.log("❌ sponsor belum siap");
-    return;
-  }
-
-  if (!document.getElementById("sponsorPopup")) {
-    document.body.insertAdjacentHTML("beforeend", sponsorHTML);
-
-    setTimeout(() => {
-      document.getElementById("sponsorPopup")?.classList.add("active");
-    }, 300);
-  }
-
+  tampilkanSponsorAdmin();
 }, 2000);
-
-// letakkan di user page
-document.addEventListener("click", function(e){
-  if(e.target.matches("#sponsorPopup .popup-header button")){ // tombol close
-    const popup = e.target.closest(".popup-overlay");
-    if(popup) popup.classList.remove("active");
-  }
-});
-
-function closePopup() {
-  const popup = document.getElementById("popupSponsor"); // sesuaikan ID
-  if (popup) {
-    popup.style.display = "none"; // sembunyikan popup
-    console.log("Popup ditutup ✅");
-  } else {
-    console.log("❌ Elemen popup tidak ditemukan");
-  }
-}
-
-
-
-    // event listeners
-    document.getElementById('closePopupBtn').addEventListener('click', () => {
-      document.getElementById('sponsorPopup').remove();
-    });
-
-    document.getElementById('claimBtn').addEventListener('click', () => {
-      document.getElementById('popupChoice').style.display = 'flex';
-    });
-
-    document.getElementById('waBtn').addEventListener('click', () => {
-      window.open(data.btnLinks.wa, '_blank');
-    });
-
-    document.getElementById('siteBtn').addEventListener('click', () => {
-      window.open(data.btnLinks.site, '_blank');
-    });
-
-    // tampilkan popup otomatis
-    setTimeout(() => {
-      document.getElementById('sponsorPopup').classList.add('active');
-    }, 2000);
-    
-  
-document.getElementById('claimBtn').addEventListener('click', () => {
-  document.getElementById('popupChoice').style.display = 'flex';
-
-});
-
-
-
-
-// Tombol copy
 
 
 
@@ -2919,7 +3484,7 @@ window.showKontak = function () {
       margin-top:10px;
       line-height:1.7;
     ">
-      Tim layanan pelanggan Kilatcash siap membantu
+      Tim layanan pelanggan Rupiahsegar siap membantu
       kebutuhan informasi dan kendala pengguna secara profesional.
     </p>
 
@@ -3023,7 +3588,7 @@ window.showKontak = function () {
 
         showToast(\`
           <div class='toast-wrap'>
-            <img src='of7e1ypd4vjyups8g2qb.png' class='toast-logo'>
+            <img src='https://res.cloudinary.com/djxlbemky/image/upload/v1791907851/uly0qmc8iykbd8cuzvux.webp' class='toast-logo'>
             <span>Email berhasil disalin</span>
           </div>
         \`);
@@ -3124,7 +3689,7 @@ window.showKontak = function () {
 
         showToast(\`
           <div class='toast-wrap'>
-            <img src='of7e1ypd4vjyups8g2qb.png' class='toast-logo'>
+            <img src='https://res.cloudinary.com/djxlbemky/image/upload/v1791907851/uly0qmc8iykbd8cuzvux.webp' class='toast-logo'>
             <span>Nomor WhatsApp berhasil disalin</span>
           </div>
         \`);
@@ -3242,7 +3807,7 @@ window.showKontak = function () {
     box-shadow:0 4px 12px rgba(0,0,0,0.04);
   ">
 
-    Dengan menggunakan layanan Kilatcash,
+    Dengan menggunakan layanan Rupiahsegar,
     pengguna dianggap telah membaca dan menyetujui
     kebijakan privasi serta ketentuan layanan yang berlaku.
 
@@ -3356,11 +3921,11 @@ window.showKetentuan = async function(){
   line-height:1.8;
   text-align:left;
 ">
-Dalam rangka meningkatkan kualitas layanan, <b style="color:#b10808;">Kilatcash</b> berkomitmen untuk melindungi serta menjaga kerahasiaan data pribadi setiap pengguna. Kebijakan ini menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi informasi pengguna selama menggunakan layanan kami.
+Dalam rangka meningkatkan kualitas layanan, <b style="color:#b10808;">Rupiahsegar</b> berkomitmen untuk melindungi serta menjaga kerahasiaan data pribadi setiap pengguna. Kebijakan ini menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi informasi pengguna selama menggunakan layanan kami.
 
 <br><br>
 
-Dengan menggunakan layanan <b style="color:#b10808;">Kilatcash</b>, pengguna dianggap telah membaca, memahami, dan menyetujui kebijakan privasi serta syarat layanan yang berlaku demi menciptakan keamanan dan kenyamanan bersama.
+Dengan menggunakan layanan <b style="color:#b10808;">Rupiahsegar</b>, pengguna dianggap telah membaca, memahami, dan menyetujui kebijakan privasi serta syarat layanan yang berlaku demi menciptakan keamanan dan kenyamanan bersama.
 </p>
 
   </div>
@@ -3670,7 +4235,7 @@ Dengan menggunakan layanan <b style="color:#b10808;">Kilatcash</b>, pengguna dia
     color:#4b5563;
     line-height:1.8;
   ">
-    Kilatcash menggunakan sistem keamanan berlapis untuk menjaga data pengguna
+    Rupiahsegar menggunakan sistem keamanan berlapis untuk menjaga data pengguna
     tetap aman dari akses tidak sah, perubahan, maupun penyalahgunaan data.
   </div>
 
@@ -3797,7 +4362,7 @@ Dengan menggunakan layanan <b style="color:#b10808;">Kilatcash</b>, pengguna dia
         line-height:1.9;
         text-align:left;
       ">
-        <b style="color:#b10808;">Kilatcash</b> berkomitmen untuk menghormati
+        <b style="color:#b10808;">Rupiahsegar</b> berkomitmen untuk menghormati
         privasi serta melindungi hak setiap pengguna dalam menggunakan layanan kami.
         Pengguna memiliki hak penuh untuk mengelola informasi dan aktivitas akun
         secara aman, transparan, dan sesuai dengan kebijakan yang berlaku.
@@ -3956,7 +4521,7 @@ Dengan menggunakan layanan <b style="color:#b10808;">Kilatcash</b>, pengguna dia
 
         <h3 style="color:#111;">Penutup</h3>
         <p>
-          Dengan menggunakan layanan Kilatcash, Anda dianggap telah membaca dan menyetujui seluruh 
+          Dengan menggunakan layanan Rupiahsegar, Anda dianggap telah membaca dan menyetujui seluruh 
           ketentuan yang berlaku dalam kebijakan ini.
         </p>
 
@@ -4212,7 +4777,7 @@ function copyOrder() {
 
     showToast(`
       <div class="toast-wrap">
-        <img src="of7e1ypd4vjyups8g2qb.png" class="toast-logo">
+        <img src="https://res.cloudinary.com/djxlbemky/image/upload/v1791907851/uly0qmc8iykbd8cuzvux.webp" class="toast-logo">
         <span>Order ID tidak ditemukan</span>
       </div>
     `, "#f44336");
@@ -4229,7 +4794,7 @@ function copyOrder() {
 
       showToast(`
         <div class="toast-wrap">
-          <img src="of7e1ypd4vjyups8g2qb.png" class="toast-logo">
+          <img src="https://res.cloudinary.com/djxlbemky/image/upload/v1791907851/uly0qmc8iykbd8cuzvux.webp" class="toast-logo">
           <span>Order ID berhasil disalin</span>
         </div>
       `);
@@ -4240,7 +4805,7 @@ function copyOrder() {
 
       showToast(`
         <div class="toast-wrap">
-          <img src="of7e1ypd4vjyups8g2qb.png" class="toast-logo">
+          <img src="https://res.cloudinary.com/djxlbemky/image/upload/v1791907851/uly0qmc8iykbd8cuzvux.webp" class="toast-logo">
           <span>Gagal menyalin Order ID</span>
         </div>
       `, "#f44336");
@@ -4266,7 +4831,7 @@ document.addEventListener("click", function (e) {
 
       showToast(`
         <div class="toast-wrap">
-          <img src="of7e1ypd4vjyups8g2qb.png" class="toast-logo">
+          <img src="https://res.cloudinary.com/djxlbemky/image/upload/v1791907851/uly0qmc8iykbd8cuzvux.webp" class="toast-logo">
           <span>Kode VA tidak tersedia</span>
         </div>
       `, "#f44336");
@@ -4281,7 +4846,7 @@ document.addEventListener("click", function (e) {
 
         showToast(`
           <div class="toast-wrap">
-            <img src="of7e1ypd4vjyups8g2qb.png" class="toast-logo">
+            <img src="https://res.cloudinary.com/djxlbemky/image/upload/v1791907851/uly0qmc8iykbd8cuzvux.webp" class="toast-logo">
             <span>Kode VA berhasil disalin</span>
           </div>
         `);
@@ -4354,7 +4919,7 @@ function kirimCS(){
   let nomorCS = "6283863319230"; // ganti dengan nomor CS kamu
 
   let text =
-`Halo CS Kilatcash, saya butuh bantuan!
+`Halo CS Rupiahsegar, saya butuh bantuan!
 
 Nomor HP Terdaftar : ${hp}
 Kategori Bantuan : ${kategori}
@@ -4458,7 +5023,7 @@ window.showKeluar = function(){
   padding:12px;
   border:none;
   border-radius:12px;
-  background:#dc2626;
+  background:#0872b1;
   color:white;
   font-weight:600;
   cursor:pointer;
@@ -4535,11 +5100,7 @@ window.addEventListener("load", () => {
     document.getElementById("jatuhTempo").innerText =
       userData.jatuhTempo || "-";
 
-    document.getElementById("bankNasabah").innerText =
-      userData.bank || "-";
-
-    document.getElementById("vaNasabah").innerText =
-      userData.va || "-";
+tampilkanBankSaya(userData);
 
       // TOTAL BAYAR
 const totalBayarEl = document.getElementById("totalBayar");
@@ -4636,66 +5197,25 @@ if(popupKodeVA){
     // ======================
     // FOTO
     // ======================
+// ======================
+// FOTO KTP & SELFIE
+// ======================
 
-    const ktpImg = document.getElementById("ktpImg");
-    const selfieImg = document.getElementById("selfieImg");
-
-    if(ktpImg){
-      ktpImg.src = userData.ktp || "";
-    }
-
-    if(selfieImg){
-      selfieImg.src = userData.swafoto || "";
-    }
-
-
-    const viewer = document.getElementById("imageViewer");
-const viewerImg = document.getElementById("viewerImg");
-const closeBtn = document.querySelector(".close-viewer");
-
-// tombol close
-if(closeBtn){
-  closeBtn.onclick = () => {
-    viewer.style.display = "none";
-  };
-}
-
-// klik luar gambar = close
-if(viewer){
-  viewer.onclick = (e) => {
-    if(e.target === viewer){
-      viewer.style.display = "none";
-    }
-  };
-}
-
-// fungsi buka gambar
-function showImage(src){
-  if(viewer && viewerImg){
-    viewer.style.display = "flex";
-    viewerImg.src = src;
-  }
-}
-
-// klik KTP
-if(ktpImg){
-  ktpImg.onclick = () => {
-    showImage(ktpImg.src);
-  };
-}
-
-// klik Selfie
-if(selfieImg){
-  selfieImg.onclick = () => {
-    showImage(selfieImg.src);
-  };
-}
-
-
-
+window.aturFotoNasabah(userData);
 
 
     console.log("✅ Auto login berhasil");
+
+
+
+    // Aktifkan iklan setelah auto login berhasil
+sponsorUserLoggedIn = true;
+
+setTimeout(() => {
+  tampilkanSponsorAdmin();
+}, 2000);
+
+
 
   } else {
     // Dashboard hanya bisa dibuka setelah login dari login.html
@@ -4724,14 +5244,201 @@ if(loader){
 
 
 
+const BANK_OPTIONS = {
+  "BRI": {
+    name: "Bank BRI",
+    logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793486918/lclhr3hce9qkduylmhrx.png"
+  },
+  "MANDIRI": {
+    name: "Bank Mandiri",
+    logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793486919/hq8xmjuv0iq4n5hutun8.png"
+  },
+  "BCA": {
+    name: "Bank BCA",
+    logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793486981/smzromlgwboyl5j6uop7.png"
+  },
+  "BNI": {
+    name: "Bank BNI",
+    logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793486981/f1lcnizkohtybrolgeoy.png"
+  },
+  "BTN": {
+    name: "Bank BTN",
+    logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793487052/mvvnlbbsf2qze8nmks56.jpg"
+  },
+  "BSI": {
+    name: "Bank Syariah Indonesia",
+    logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793487051/hibprecnd3sti2tcvxrv.png"
+  },
+  "CIMB": {
+    name: "CIMB Niaga",
+    logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793487129/zunsoh7e4gidcclpkcdo.jpg"
+  },
+  "DANAMON": {
+    name: "Bank Danamon",
+    logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793487131/ngvhcktc0dxfd1jipkdy.webp"
+  },
+  "PERMATA": {
+    name: "Bank Permata",
+    logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793487233/foz25lnxjq6budovxrke.jpg"
+  },
+  "OCBC": {
+    name: "OCBC",
+    logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793487310/xqtmxshsfzqwutcsdrfo.png"
+  },
+  "MAYBANK": {
+    name: "Maybank",
+    logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793487232/dokns5mzw3jykyyg7fpu.webp"
+  },
+  "LAINNYA": {
+    name: "Tidak Tersedia Bank Lainnya",
+    logo: ""
+  }
+};
+function tampilkanBankSaya(userData) {
+  const bankEl = document.getElementById("bankNasabah");
+  if (!bankEl) return;
 
+  const daftarVA = Array.isArray(userData.virtualAccounts)
+    ? userData.virtualAccounts
+    : [];
+
+  // Mendukung data lama
+  const daftarBank = daftarVA.length
+    ? daftarVA
+    : [{ bank: userData.bank || "-" }];
+
+  // Normalisasi nama bank
+  function cariKodeBank(nama) {
+    const teks = String(nama || "")
+      .trim()
+      .toUpperCase()
+      .replace(/^BANK\s+/, "")
+      .replace(/\s+/g, " ");
+
+    const alias = {
+      "BRI": "BRI",
+      "MANDIRI": "MANDIRI",
+      "BCA": "BCA",
+      "BNI": "BNI",
+      "BTN": "BTN",
+
+      "BSI": "BSI",
+      "SYARIAH INDONESIA": "BSI",
+      "BANK SYARIAH INDONESIA": "BSI",
+      "BANK SYARIAH INDONESIA (BSI)": "BSI",
+
+      "CIMB": "CIMB",
+      "CIMB NIAGA": "CIMB",
+      "DANAMON": "DANAMON",
+      "PERMATA": "PERMATA",
+      "OCBC": "OCBC",
+      "MAYBANK": "MAYBANK"
+    };
+
+    return alias[teks] || teks;
+  }
+
+  bankEl.innerHTML = "";
+
+  // Buat daftar bank beserta logo
+  const semuaBank = daftarBank.map(item => {
+    const kodeBank = cariKodeBank(item.bank);
+    const infoBank = BANK_OPTIONS[kodeBank] || {};
+
+    return {
+      namaBank: infoBank.name || item.bank || "-",
+      logo: infoBank.logo || item.logo || ""
+    };
+  });
+
+  // Container daftar bank
+  const listBank = document.createElement("div");
+  listBank.className = "bank-list-saya";
+
+  // Maksimal 3 bank pertama
+  const bankAwal = semuaBank.slice(0, 3);
+  const bankLain = semuaBank.slice(3);
+
+ function buatItemBank(item) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "bank-item-saya";
+
+    wrapper.style.cursor = "pointer";
+
+    if (item.logo && item.logo.startsWith("http")) {
+        const img = document.createElement("img");
+
+        img.src = item.logo;
+        img.alt = item.namaBank;
+        img.referrerPolicy = "no-referrer";
+
+        img.onerror = function() {
+            this.style.display = "none";
+        };
+
+        wrapper.appendChild(img);
+    }
+
+    const nama = document.createElement("span");
+    nama.textContent = item.namaBank;
+
+    wrapper.appendChild(nama);
+
+    // Klik bank menuju halaman Pinjaman-saya.html
+wrapper.addEventListener("click", function() {
+    window.location.href =
+        "Pinjaman-saya.html?openBayar=1&bank=" +
+        encodeURIComponent(item.namaBank);
+});
+
+    return wrapper;
+}
+
+  // Tampilkan 3 bank pertama
+  bankAwal.forEach(item => {
+    listBank.appendChild(buatItemBank(item));
+  });
+
+  bankEl.appendChild(listBank);
+
+  // Jika lebih dari 3 bank, tampilkan tombol
+  if (bankLain.length > 0) {
+    const listTambahan = document.createElement("div");
+    listTambahan.className = "bank-list-tambahan";
+    listTambahan.style.display = "none";
+
+    bankLain.forEach(item => {
+      listTambahan.appendChild(buatItemBank(item));
+    });
+
+    bankEl.appendChild(listTambahan);
+
+    const tombol = document.createElement("button");
+    tombol.type = "button";
+    tombol.className = "bank-lihat-lainnya";
+    tombol.textContent = "Lihat Bank Lainnya";
+
+    tombol.onclick = function() {
+      const sedangTerbuka =
+        listTambahan.style.display === "block";
+
+      listTambahan.style.display =
+        sedangTerbuka ? "none" : "block";
+
+      tombol.textContent = sedangTerbuka
+        ? "Lihat Bank Lainnya"
+        : "Tutup Bank Lainnya";
+    };
+
+    bankEl.appendChild(tombol);
+  }
+}
 </script>
-<script src="script.js"></script>
 
 
   <!-- Footer -->
 <footer id="copyright">
-  © 2026 <span>Kilatcash</span> • All Rights Reserved
+  © 2026 <span>Rupiahsegar</span> • All Rights Reserved
 </footer>
 </div>
 </body>
