@@ -3573,15 +3573,6 @@ createMaintenanceField();
 
 
 
-
-
-
-
-
-
-
-
-
 const CLOUD_NAME = "biqlcagw";
 const UPLOAD_PRESET = "pinjaman2";
 
@@ -4209,79 +4200,69 @@ const BANK_OPTIONS = {
     name: "Maybank",
     logo: "https://res.cloudinary.com/djxlbemky/image/upload/v1793487232/dokns5mzw3jykyyg7fpu.webp"
   },
+
+  "QRIS": {
+    name: "QRIS",
+    logo: ""
+  },
+
+
+
   "LAINNYA": {
     name: "Bank Lainnya",
     logo: ""
-  }
+  },
+
+
 };
 
 // Membuat satu form VA
+// Membuat satu form VA / QRIS
 window.tambahVAForm = function(data = {}) {
 
   const container = document.getElementById("vaFormList");
-
   if (!container) return;
 
   const nomor = container.children.length + 1;
-
   const card = document.createElement("div");
 
   card.className = "va-form-item";
 
   card.innerHTML = `
     <div class="va-form-header">
+      <strong class="va-title">Virtual Account ${nomor}</strong>
 
-      <strong class="va-title">
-        Virtual Account ${nomor}
-      </strong>
-
-      <button
-        type="button"
-        class="va-remove-button"
-      >
+      <button type="button" class="va-remove-button">
         Hapus
       </button>
-
     </div>
 
     <div class="va-form-fields">
 
       <div class="va-field">
-
-        <label>Bank</label>
+        <label>Bank / Metode Pembayaran</label>
 
         <select class="va-bank-select">
-
           <option value="">Pilih Bank</option>
 
           ${Object.entries(BANK_OPTIONS).map(([key, bank]) => `
-            <option value="${key}">
-              ${bank.name}
-            </option>
+            <option value="${key}">${bank.name}</option>
           `).join("")}
-
         </select>
-
       </div>
 
-      <div class="va-field">
-
+      <div class="va-field va-logo-field">
         <label>Logo Bank</label>
 
         <div class="va-logo-preview">
-
           <img class="va-logo-img" style="display:none;">
-
           <span class="va-logo-name">
             Logo akan tampil otomatis
           </span>
-
         </div>
-
       </div>
 
-      <div class="va-field" style="grid-column:1/-1;">
-
+      <div class="va-field va-code-field" style="grid-column:1/-1;">
         <label>Kode VA</label>
 
         <input
@@ -4290,6 +4271,40 @@ window.tambahVAForm = function(data = {}) {
           placeholder="Masukkan nomor VA resmi"
           autocomplete="off"
         >
+      </div>
+
+      <div class="va-field va-qris-field"
+           style="grid-column:1/-1;display:none;">
+
+        <label>Upload Gambar QRIS</label>
+
+        <input
+          type="file"
+          class="va-qris-input"
+          accept="image/*"
+        >
+
+        <div class="va-qris-preview"
+             style="margin-top:12px;display:none;">
+
+          <img
+            class="va-qris-preview-img"
+            style="
+              width:180px;
+              max-width:100%;
+              height:auto;
+              object-fit:contain;
+              border:1px solid #ddd;
+              border-radius:10px;
+              padding:5px;
+              background:#fff;
+            "
+          >
+
+          <div style="font-size:12px;margin-top:6px;color:#666;">
+            Preview gambar QRIS
+          </div>
+        </div>
 
       </div>
 
@@ -4303,10 +4318,46 @@ window.tambahVAForm = function(data = {}) {
   const logoName = card.querySelector(".va-logo-name");
   const code = card.querySelector(".va-code-input");
 
-  function updateLogo() {
+  const logoField = card.querySelector(".va-logo-field");
+  const codeField = card.querySelector(".va-code-field");
+  const qrisField = card.querySelector(".va-qris-field");
+
+  const qrisInput = card.querySelector(".va-qris-input");
+  const qrisPreview = card.querySelector(".va-qris-preview");
+  const qrisPreviewImg = card.querySelector(".va-qris-preview-img");
+
+  // Simpan URL QRIS lama jika form sedang memuat data
+  card.dataset.qrisImage = data.qrImage || "";
+
+  function updateMetode() {
 
     const key = select.value;
     const bank = BANK_OPTIONS[key];
+
+    const isQRIS = key === "QRIS";
+
+    if (isQRIS) {
+
+      logoField.style.display = "none";
+      codeField.style.display = "none";
+      qrisField.style.display = "block";
+
+      logo.removeAttribute("src");
+      logo.style.display = "none";
+
+      code.value = "";
+
+      if (card.dataset.qrisImage) {
+        qrisPreviewImg.src = card.dataset.qrisImage;
+        qrisPreview.style.display = "block";
+      }
+
+      return;
+    }
+
+    qrisField.style.display = "none";
+    logoField.style.display = "";
+    codeField.style.display = "";
 
     if (!bank) {
       logo.style.display = "none";
@@ -4316,29 +4367,45 @@ window.tambahVAForm = function(data = {}) {
 
     logoName.textContent = bank.name;
 
-    if (bank.domain) {
-
-      logo.src =
-        "https://www.google.com/s2/favicons?domain=" +
-        encodeURIComponent(bank.domain) +
-        "&sz=128";
-
+    if (bank.logo) {
+      logo.src = bank.logo;
       logo.style.display = "block";
 
       logo.onerror = function() {
-        logo.style.display = "none";
+        this.style.display = "none";
       };
-
     } else {
-
+      logo.removeAttribute("src");
       logo.style.display = "none";
-
     }
   }
 
-  select.addEventListener("change", updateLogo);
+  select.addEventListener("change", updateMetode);
 
-  // Isi data jika sedang memuat data lama
+  // Preview gambar QRIS yang baru dipilih
+  qrisInput.addEventListener("change", function() {
+
+    const file = this.files[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("File QRIS harus berupa gambar!");
+      this.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+      qrisPreviewImg.src = e.target.result;
+      qrisPreview.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
+  });
+
+  // Isi data lama
   if (data.bankKey) {
     select.value = data.bankKey;
   }
@@ -4347,7 +4414,7 @@ window.tambahVAForm = function(data = {}) {
     code.value = data.kodeVA;
   }
 
-  updateLogo();
+  updateMetode();
 
   // Tombol hapus
   card.querySelector(".va-remove-button").onclick = function() {
@@ -4358,13 +4425,10 @@ window.tambahVAForm = function(data = {}) {
     }
 
     card.remove();
-
     perbaruiNomorVA();
-
   };
 
   perbaruiNomorVA();
-
 };
 
 
@@ -4386,6 +4450,7 @@ window.perbaruiNomorVA = function() {
 
 
 // Ambil seluruh VA dari form
+// Ambil seluruh VA / QRIS dari form
 window.ambilSemuaVA = function() {
 
   const cards = document.querySelectorAll(
@@ -4397,33 +4462,36 @@ window.ambilSemuaVA = function() {
   cards.forEach(card => {
 
     const bankKey = card.querySelector(".va-bank-select").value;
-
     const kodeVA = card.querySelector(".va-code-input").value.trim();
 
+    const qrisInput = card.querySelector(".va-qris-input");
     const bank = BANK_OPTIONS[bankKey];
 
     result.push({
 
       bankKey: bankKey,
 
-      bank: bank ? bank.name : "",
+      bank: bankKey === "QRIS"
+        ? "QRIS"
+        : bank ? bank.name : "",
 
-      bankLogo: bank && bank.domain
-        ? "https://www.google.com/s2/favicons?domain=" +
-          encodeURIComponent(bank.domain) +
-          "&sz=128"
-        : "",
+      bankLogo: bank ? bank.logo || "" : "",
 
-      kodeVA: kodeVA,
+      kodeVA: bankKey === "QRIS" ? "" : kodeVA,
 
-      va: kodeVA
+      va: bankKey === "QRIS" ? "" : kodeVA,
+
+      // File gambar hanya dipakai sementara saat upload
+      qrFile: qrisInput?.files?.[0] || null,
+
+      // URL gambar lama jika ada
+      qrImage: card.dataset.qrisImage || ""
 
     });
 
   });
 
   return result;
-
 };
 
 
@@ -4439,92 +4507,136 @@ if (document.getElementById("vaFormList")) {
 
   // -----------------------
 
-
 window.kirimData = async () => {
 
   const nama = document.getElementById("nama").value.trim();
-
   const tagihan = document.getElementById("tagihan").value;
 
   const ktpFile = document.getElementById("ktp").files[0];
-
   const selfieFile = document.getElementById("selfie").files[0];
 
-  const virtualAccounts = ambilSemuaVA();
+  const formVirtualAccounts = ambilSemuaVA();
 
   if (!nama || !tagihan) {
     alert("Isi data wajib!");
     return;
   }
 
-  // Foto KTP dan selfie TIDAK WAJIB
-
-  // Validasi seluruh form VA
-  if (!virtualAccounts.length) {
+  if (!formVirtualAccounts.length) {
     alert("Tambahkan minimal satu VA!");
     return;
   }
 
-  for (let i = 0; i < virtualAccounts.length; i++) {
+  // Validasi jumlah QRIS
+  const jumlahQRIS = formVirtualAccounts.filter(
+    item => item.bankKey === "QRIS"
+  ).length;
 
-    if (!virtualAccounts[i].bankKey || !virtualAccounts[i].kodeVA) {
+  if (jumlahQRIS > 1) {
+    alert("Satu nasabah hanya boleh memiliki satu metode QRIS!");
+    return;
+  }
+
+  // Validasi masing-masing metode
+  for (let i = 0; i < formVirtualAccounts.length; i++) {
+
+    const item = formVirtualAccounts[i];
+
+    if (!item.bankKey) {
+      alert("Pilih bank atau metode pembayaran pada Virtual Account " + (i + 1));
+      return;
+    }
+
+    if (item.bankKey === "QRIS") {
+
+      if (!item.qrFile && !item.qrImage) {
+        alert("Silakan upload gambar QRIS!");
+        return;
+      }
+
+    } else if (!item.kodeVA) {
 
       alert(
-        "Lengkapi pilihan bank dan Kode VA pada Virtual Account " +
-        (i + 1)
+        "Lengkapi Kode VA pada Virtual Account " + (i + 1)
       );
 
       return;
     }
-
   }
-
-  // Ambil VA pertama untuk kompatibilitas data lama
-  const vaPertama = virtualAccounts[0];
-
-  // Sinkronkan field lama
-  document.getElementById("bank").value = vaPertama.bank;
-
-  document.getElementById("nomorVA").value = vaPertama.va;
-
-  document.getElementById("kodeVA").value = vaPertama.kodeVA;
 
   try {
 
-    // Default URL foto kosong
+    // Upload KTP dan selfie
     let ktpUrl = "";
     let selfieUrl = "";
 
-    // Upload foto KTP hanya jika dipilih
     if (ktpFile) {
-
       console.log("Mengupload foto KTP...");
-
       ktpUrl = await uploadToCloudinary(ktpFile);
-
     }
 
-    // Upload foto selfie hanya jika dipilih
     if (selfieFile) {
-
       console.log("Mengupload foto selfie...");
-
       selfieUrl = await uploadToCloudinary(selfieFile);
-
     }
 
+    // Upload gambar QRIS dan susun data untuk Firestore
+    const virtualAccounts = [];
+
+    for (const item of formVirtualAccounts) {
+
+      if (item.bankKey === "QRIS") {
+
+        let qrImageUrl = item.qrImage || "";
+
+        if (item.qrFile) {
+          console.log("Mengupload gambar QRIS...");
+          qrImageUrl = await uploadToCloudinary(item.qrFile);
+        }
+
+        if (!qrImageUrl) {
+          throw new Error("Gambar QRIS gagal diupload.");
+        }
+
+        virtualAccounts.push({
+          bankKey: "QRIS",
+          bank: "QRIS",
+          bankLogo: "",
+          kodeVA: "",
+          va: "",
+          qrImage: qrImageUrl
+        });
+
+      } else {
+
+        virtualAccounts.push({
+          bankKey: item.bankKey,
+          bank: item.bank,
+          bankLogo: item.bankLogo,
+          kodeVA: item.kodeVA,
+          va: item.va
+        });
+
+      }
+    }
+
+    // Ambil metode pertama untuk kompatibilitas data lama
+    const vaPertama = virtualAccounts[0];
+
+    document.getElementById("bank").value = vaPertama.bank;
+    document.getElementById("nomorVA").value = vaPertama.va;
+    document.getElementById("kodeVA").value = vaPertama.kodeVA;
+
+    // Simpan data nasabah
     await addDoc(collection(db, "users"), {
 
       nama: nama,
 
-      // Data VA baru
       virtualAccounts: virtualAccounts,
 
       // Field lama tetap dipertahankan
       bank: vaPertama.bank,
-
       va: vaPertama.va,
-
       kodeVA: vaPertama.kodeVA,
 
       noWa: document.getElementById("noWa").value,
@@ -4548,14 +4660,12 @@ window.kirimData = async () => {
 
       waktu: new Date(),
 
-      // Foto kosong jika tidak diupload
       ktp: ktpUrl,
-
       swafoto: selfieUrl
 
     });
 
-    alert("Data nasabah dan seluruh VA berhasil disimpan!");
+    alert("Data nasabah dan seluruh metode pembayaran berhasil disimpan!");
 
     location.reload();
 
@@ -4601,12 +4711,26 @@ window.tampilkanDaftarVA = function(data, field) {
         kodeVA: data.kodeVA || "-"
       }];
 
-  const ambilNilai = (item) => {
-    if (field === "bank") return item.bank || "-";
-    if (field === "va") return item.va || item.kodeVA || "-";
-    if (field === "kodeVA") return item.kodeVA || "-";
-    return "-";
-  };
+const ambilNilai = (item) => {
+
+  const isQRIS =
+    item.bankKey === "QRIS" ||
+    String(item.bank || "").toUpperCase() === "QRIS";
+
+  if (field === "bank") {
+    return isQRIS ? "QRIS" : item.bank || "-";
+  }
+
+  if (field === "va") {
+    return isQRIS ? "QRIS (Gambar)" : item.va || item.kodeVA || "-";
+  }
+
+  if (field === "kodeVA") {
+    return isQRIS ? "QRIS" : item.kodeVA || "-";
+  }
+
+  return "-";
+};
 
   // Dua bank pertama
   const duaPertama = daftar.slice(0, 2);

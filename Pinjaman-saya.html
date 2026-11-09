@@ -10,27 +10,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <!-- SEO -->
-<title>DANA PLATFORM - Layanan Digital</title>
-<meta name="description" content="DANA PLATFORM - Layanan pengecekan informasi dan layanan pengguna secara online.">
+<title>Rupiah Segar - Layanan Digital</title>
+<meta name="description" content="Rupiah Segar - Layanan pengecekan informasi dan layanan pengguna secara online.">
 <meta name="robots" content="index, follow">
 
 <!-- OPEN GRAPH -->
-<meta property="og:title" content="DANA PLATFORM">
-<meta property="og:description" content="Layanan digital DANA PLATFORM.">
-<meta property="og:image" content="https://danaplatform.github.io/danaplatform/logo8view.jpeg">
-<meta property="og:url" content="https://danaplatform.github.io/danaplatform/index.html">
+<meta property="og:title" content="Rupiah Segar">
+<meta property="og:description" content="Layanan digital Rupiah Segar.">
+<meta property="og:image" content="https://rupiahsegar.com/rupiahsegar-view.jpg">
+<meta property="og:url" content="https://rupiahsegar.com/index.html">
 <meta property="og:type" content="website">
 
 <!-- TWITTER -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="DANA PLATFORM">
-<meta name="twitter:description" content="Layanan digital DANA PLATFORM.">
-<meta name="twitter:image" content="https://danaplatform.github.io/danaplatform/logo8view.jpeg">
+<meta name="twitter:title" content="Rupiah Segar">
+<meta name="twitter:description" content="Layanan digital Rupiah Segar.">
+<meta name="twitter:image" content="https://rupiahsegar.com/rupiahsegar-view.jpg">
 
 <!-- FAVICON / ICON TAB -->
-<link rel="icon" type="image/jpeg" href="./logo8view.jpeg?v=2">
-<link rel="shortcut icon" type="image/jpeg" href="./logo8view.jpeg?v=2">
-<link rel="apple-touch-icon" href="./logo8view.jpeg?v=2">
+<link rel="icon" type="image/jpeg" href="./rupiahsegar-view.jpg?v=2">
+<link rel="shortcut icon" type="image/jpeg" href="./rupiahsegar-view.jpg?v=2">
+<link rel="apple-touch-icon" href="./rupiahsegar-view.jpg?v=2">
 
 <!-- THEME -->
 <meta name="theme-color" content="#b10808">
@@ -39,9 +39,9 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "DANA PLATFORM",
-  "url": "https://danaplatform.github.io/danaplatform/",
-  "logo": "https://danaplatform.github.io/danaplatform/logo8view.jpeg"
+  "name": "Rupiah Segar",
+  "url": "https://rupiahsegar.com/",
+  "logo": "https://rupiahsegar.com/rupiahsegar-view.jpg"
 }
 </script>
 
@@ -2694,9 +2694,11 @@ function cariLogoBankPopup(namaBank) {
   return BANK_OPTIONS[kode] || {};
 }
 
+
 function isiPilihanBankPopup(data) {
   const select = document.getElementById("popupBankSelect");
   const vaContainer = document.getElementById("popupKodeVA");
+  const logoElement = document.getElementById("popupLogoBankVA");
 
   if (!select || !vaContainer) return;
 
@@ -2704,26 +2706,47 @@ function isiPilihanBankPopup(data) {
     ? data.virtualAccounts
     : [];
 
+  // Ambil data VA dan QRIS
   daftarVAPopupAktif = daftarVA.map(item => {
     const kodeBank = String(
-      item.bank || item.namaBank || ""
+      item.bank || item.namaBank || item.bankKey || ""
     ).trim().toUpperCase();
+
+    const isQRIS =
+      kodeBank === "QRIS" ||
+      String(item.bankKey || "").trim().toUpperCase() === "QRIS";
 
     const infoBank = cariLogoBankPopup(kodeBank);
 
     return {
-      bank: kodeBank,
-      namaBank: infoBank.name || item.namaBank || item.bank || "Bank",
-      logo: infoBank.logo || item.logo || item.logoBank || "",
+      bank: isQRIS ? "QRIS" : kodeBank,
+      namaBank: isQRIS
+        ? "QRIS"
+        : infoBank.name || item.namaBank || item.bank || "Bank",
+      logo: isQRIS
+        ? ""
+        : infoBank.logo || item.logo || item.logoBank || "",
       kodeVA: String(
         item.kodeVA ||
         item.va ||
         item.virtualAccount ||
         item.nomorVA ||
         ""
-      ).trim()
+      ).trim(),
+      qrImage: String(
+        item.qrImage ||
+        item.qrisImage ||
+        item.gambarQRIS ||
+        item.qris ||
+        ""
+      ).trim(),
+      isQRIS
     };
-  }).filter(item => item.bank && item.kodeVA);
+  }).filter(item => {
+    return item.isQRIS
+      ? Boolean(item.qrImage)
+      : Boolean(item.bank && item.kodeVA);
+  });
 
   // Fallback data VA lama
   if (
@@ -2738,18 +2761,26 @@ function isiPilihanBankPopup(data) {
       bank: kodeBank,
       namaBank: infoBank.name || data.bank,
       logo: infoBank.logo || "",
-      kodeVA: String(data.kodeVA || data.va).trim()
+      kodeVA: String(data.kodeVA || data.va).trim(),
+      qrImage: "",
+      isQRIS: false
     }];
   }
 
   select.innerHTML = "";
 
   if (daftarVAPopupAktif.length === 0) {
-    select.innerHTML = '<option value="">Bank tidak tersedia</option>';
+    select.innerHTML = '<option value="">Metode pembayaran tidak tersedia</option>';
     vaContainer.textContent = "-";
+
+    if (logoElement) {
+      logoElement.style.display = "none";
+    }
+
     return;
   }
 
+  // Isi dropdown
   daftarVAPopupAktif.forEach((item, index) => {
     const option = document.createElement("option");
     option.value = index;
@@ -2757,6 +2788,7 @@ function isiPilihanBankPopup(data) {
     select.appendChild(option);
   });
 
+  // Tampilkan VA atau gambar QRIS
   function tampilkanVA() {
     const index = Number(select.value);
     const item = daftarVAPopupAktif[index];
@@ -2766,80 +2798,236 @@ function isiPilihanBankPopup(data) {
       return;
     }
 
-    vaContainer.textContent = item.kodeVA;
+    const copyButton = document.getElementById("copyVA");
 
-const logoElement = document.getElementById("popupLogoBankVA");
+   
+if (item.isQRIS) {
 
-if (logoElement) {
-  logoElement.onerror = function() {
-    console.error("Gagal memuat logo:", item.logo);
-    this.style.display = "none";
-  };
-
-  if (item.logo) {
-    logoElement.src = item.logo;
-    logoElement.style.display = "block";
-  } else {
-    logoElement.removeAttribute("src");
+  if (logoElement) {
     logoElement.style.display = "none";
   }
-}
+
+  vaContainer.innerHTML = "";
+
+  const wrapper = document.createElement("div");
+  wrapper.style.cssText = `
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    width:100%;
+  `;
+
+  // Gambar QRIS
+  const qrImage = document.createElement("img");
+  qrImage.src = item.qrImage;
+  qrImage.alt = "QRIS Pembayaran";
+  qrImage.style.cssText = `
+    display:block;
+    width:190px;
+    max-width:100%;
+    height:auto;
+    margin:12px auto 0;
+    object-fit:contain;
+    border-radius:10px;
+    cursor:zoom-in;
+  `;
+
+  qrImage.onerror = function() {
+    wrapper.textContent = "Gambar QRIS gagal dimuat";
+  };
+
+  // Klik gambar untuk memperbesar
+  qrImage.addEventListener("click", function() {
+
+    let viewer = document.getElementById("qrisViewerPopup");
+
+    if (!viewer) {
+      viewer = document.createElement("div");
+      viewer.id = "qrisViewerPopup";
+
+      viewer.style.cssText = `
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.88);
+        z-index:999999;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        padding:20px;
+        box-sizing:border-box;
+      `;
+
+      viewer.innerHTML = `
+        <button type="button" id="qrisViewerClose"
+          style="
+            position:absolute;
+            top:20px;
+            right:20px;
+            width:40px;
+            height:40px;
+            border:none;
+            border-radius:50%;
+            background:#fff;
+            color:#222;
+            font-size:25px;
+            cursor:pointer;
+          ">×</button>
+
+        <img id="qrisViewerImage"
+          style="
+            max-width:95%;
+            max-height:75vh;
+            width:auto;
+            height:auto;
+            object-fit:contain;
+            background:#fff;
+            border-radius:12px;
+            padding:6px;
+            box-sizing:border-box;
+          ">
+
+        <a id="qrisDownloadButton"
+          download="QRIS-Pembayaran.png"
+          style="
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:8px;
+            margin-top:18px;
+            padding:13px 24px;
+            border-radius:9px;
+            background:#0c85ff;
+            color:#fff;
+            text-decoration:none;
+            font-size:14px;
+            font-weight:600;
+          ">
+          <i class="fas fa-download"></i>
+          Download QRIS
+        </a>
+      `;
+
+      document.body.appendChild(viewer);
+
+      viewer.querySelector("#qrisViewerClose").onclick = function() {
+        viewer.style.display = "none";
+      };
+
+      viewer.addEventListener("click", function(e) {
+        if (e.target === viewer) {
+          viewer.style.display = "none";
+        }
+      });
+    }
+
+    viewer.querySelector("#qrisViewerImage").src = item.qrImage;
+    viewer.querySelector("#qrisDownloadButton").href = item.qrImage;
+    viewer.style.display = "flex";
+  });
+
+  // Tombol download langsung
+  const downloadButton = document.createElement("a");
+  downloadButton.href = item.qrImage;
+  downloadButton.download = "QRIS-Pembayaran.png";
+  downloadButton.textContent = "Download QRIS";
+
+  downloadButton.style.cssText = `
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 20px;
+    border-radius:8px;
+    background:#0c85ff;
+    color:#fff;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+  `;
+
+  wrapper.appendChild(qrImage);
+  wrapper.appendChild(downloadButton);
+  vaContainer.appendChild(wrapper);
+
+  const copyButton = document.getElementById("copyVA");
+
+  if (copyButton) {
+    copyButton.style.display = "none";
   }
 
-select.onchange = tampilkanVA;
+} else {
 
-// =====================================
-// PILIH BANK OTOMATIS DARI HALAMAN SAYA
-// =====================================
+      // Tampilkan kembali kode VA
+      vaContainer.textContent = item.kodeVA;
 
-let indexBankTerpilih = 0;
+      // Tampilkan tombol copy
+      if (copyButton) {
+        copyButton.style.display = "";
+      }
 
-const bankDariURL = String(
+      // Tampilkan logo bank
+      if (logoElement) {
+        logoElement.onerror = function() {
+          console.error("Gagal memuat logo:", item.logo);
+          this.style.display = "none";
+        };
+
+        if (item.logo) {
+          logoElement.src = item.logo;
+          logoElement.style.display = "block";
+        } else {
+          logoElement.removeAttribute("src");
+          logoElement.style.display = "none";
+        }
+      }
+    }
+  }
+
+  select.onchange = tampilkanVA;
+
+  // Pilihan bank otomatis dari URL
+  let indexBankTerpilih = 0;
+
+  const bankDariURL = String(
     window.bankPilihanDariURL || ""
-).trim();
+  ).trim();
 
-if (bankDariURL) {
-
+  if (bankDariURL) {
     const targetBank = cariLogoBankPopup(bankDariURL);
-    const namaTarget = String(targetBank.name || bankDariURL)
-        .trim()
-        .toUpperCase();
+    const namaTarget = String(
+      targetBank.name || bankDariURL
+    ).trim().toUpperCase();
 
     const indexDitemukan = daftarVAPopupAktif.findIndex(item => {
+      const infoItem = cariLogoBankPopup(item.bank);
 
-        const infoItem = cariLogoBankPopup(item.bank);
+      const namaItem = String(
+        infoItem.name || item.namaBank || item.bank
+      ).trim().toUpperCase();
 
-        const namaItem = String(
-            infoItem.name || item.namaBank || item.bank
-        ).trim().toUpperCase();
-
-        return namaItem === namaTarget;
+      return namaItem === namaTarget;
     });
 
     if (indexDitemukan !== -1) {
-        indexBankTerpilih = indexDitemukan;
+      indexBankTerpilih = indexDitemukan;
     }
+  }
+
+  select.value = String(indexBankTerpilih);
+  tampilkanVA();
+
+  console.log(
+    "METODE TERPILIH:",
+    daftarVAPopupAktif[indexBankTerpilih]
+  );
+
+  console.log("DAFTAR METODE:", daftarVAPopupAktif);
 }
-
-// Terapkan pilihan bank
-select.value = String(indexBankTerpilih);
-
-// Tampilkan logo dan kode VA bank terpilih
-tampilkanVA();
-
-console.log("BANK TERPILIH:", daftarVAPopupAktif[indexBankTerpilih]);
-console.log("DAFTAR BANK POPUP:", daftarVAPopupAktif);
-}
-
-console.table(
-  daftarVAPopupAktif.map(item => ({
-    bank: item.bank,
-    nama: item.namaBank,
-    logo: item.logo
-  }))
-);
 
 window.isiPilihanBankPopup = isiPilihanBankPopup;
+
 
 
 
