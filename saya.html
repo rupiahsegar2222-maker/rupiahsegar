@@ -5359,24 +5359,22 @@ function tampilkanBankSaya(userData) {
   const bankAwal = semuaBank.slice(0, 3);
   const bankLain = semuaBank.slice(3);
 
- function buatItemBank(item) {
+  function buatItemBank(item) {
     const wrapper = document.createElement("div");
     wrapper.className = "bank-item-saya";
 
-    wrapper.style.cursor = "pointer";
-
     if (item.logo && item.logo.startsWith("http")) {
-        const img = document.createElement("img");
+      const img = document.createElement("img");
 
-        img.src = item.logo;
-        img.alt = item.namaBank;
-        img.referrerPolicy = "no-referrer";
+      img.src = item.logo;
+      img.alt = item.namaBank;
+      img.referrerPolicy = "no-referrer";
 
-        img.onerror = function() {
-            this.style.display = "none";
-        };
+      img.onerror = function() {
+        this.style.display = "none";
+      };
 
-        wrapper.appendChild(img);
+      wrapper.appendChild(img);
     }
 
     const nama = document.createElement("span");
@@ -5384,15 +5382,8 @@ function tampilkanBankSaya(userData) {
 
     wrapper.appendChild(nama);
 
-    // Klik bank menuju halaman Pinjaman-saya.html
-wrapper.addEventListener("click", function() {
-    window.location.href =
-        "Pinjaman-saya.html?openBayar=1&bank=" +
-        encodeURIComponent(item.namaBank);
-});
-
     return wrapper;
-}
+  }
 
   // Tampilkan 3 bank pertama
   bankAwal.forEach(item => {
